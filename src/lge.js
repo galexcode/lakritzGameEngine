@@ -1022,6 +1022,9 @@ LGE.ENTITIES.MoveableEntity = LGE.ENTITIES.Entity.extend({
 		this.velocity.divideSelf({x:this.friction.x+1, y:this.friction.y+1, z:this.friction.z+1});
 		this.velocity.y -= this.gravity;
 	}
+},{
+	//TODO, doesnt really fix the collision problem, just sugar codes it
+	maxVelocity:35
 });
 
 LGE.ENTITIES.MoveableCollisionEntity = LGE.ENTITIES.MoveableEntity.extend({
@@ -1041,7 +1044,7 @@ LGE.ENTITIES.MoveableCollisionEntity = LGE.ENTITIES.MoveableEntity.extend({
 LGE.ENTITIES.CollidableMeshEntity = extendTHREEClass(THREE.Mesh,$.extend(Object.create(LGE.ENTITIES.MoveableEntity),{
 	lastCollision:{tfl:false,tfr:false,tbl:false,tbr:false,bfl:false,bfr:false,bbl:false,bbr:false,collides:false}
 	,repel:0
-	,precision:2
+	,precision:.1
 	,autoCollisionAgainst:null
 	,init:function(geometry,material,velocity,friction,gravity,repel){
 		THREE.Mesh.call(this, geometry, material);
@@ -1063,7 +1066,7 @@ LGE.ENTITIES.CollidableMeshEntity = extendTHREEClass(THREE.Mesh,$.extend(Object.
 			localVertex = this.geometry.vertices[vertexIndex].clone();
 			globalVertex = this.matrix.multiplyVector3(localVertex);
 			directionVector = globalVertex.subSelf(this.position);
-			ray = new THREE.Ray(originPoint,directionVector.clone().normalize());
+			ray = new THREE.Ray(originPoint,directionVector.clone().normalize(),LGE.ENTITIES.CollidableMeshEntity.defaultCollisionNear,LGE.ENTITIES.CollidableMeshEntity.defaultCollisionFar );
 			collisions = ray.intersectObjects(collidableMeshList);
 			if(collisions.length && collisions[0].distance < directionVector.length()){
 				with(directionVector){
@@ -1097,10 +1100,16 @@ LGE.ENTITIES.CollidableMeshEntity = extendTHREEClass(THREE.Mesh,$.extend(Object.
 		}
 		return (this.lastCollision = hitdirections);
 	}
+	/**
+	* TODO if the change in Position is bigger than the actual mesh itself, collision detection fails on Planes, because the mesh practically teleports
+	* from in front of the hittable object to in back of it. here needs to be some sort of exception if the Mesh should have hit, but didn't...
+	*/
 	,update:function(delta){
+		var hitsGround=false;
 		if(this.autoCollisionAgainst){
 			this.collides(this.autoCollisionAgainst);
 		}
+
 		if(this.lastCollision.collides){
 			//Collision on x axis			
 			if
@@ -1120,9 +1129,6 @@ LGE.ENTITIES.CollidableMeshEntity = extendTHREEClass(THREE.Mesh,$.extend(Object.
 				)
 			){
 				this.velocity.x *= this.repel * -1;
-				if(Math.abs(this.velocity.x)<this.precision){
-					this.velocity.x = 0;
-				}
 				this.velocity.y /= this.friction.y+1;
 				this.velocity.z /= this.friction.z+1;
 			}
@@ -1145,11 +1151,9 @@ LGE.ENTITIES.CollidableMeshEntity = extendTHREEClass(THREE.Mesh,$.extend(Object.
 				)
 			){
 				this.velocity.y *= this.repel * -1;
-				if(Math.abs(this.velocity.y)<this.precision){
-					this.velocity.y = 0;
-				}
 				this.velocity.x /= this.friction.x+1;
 				this.velocity.z /= this.friction.z+1;
+				hitsGround=true;
 			}
 
 			//Collision on z axis			
@@ -1170,16 +1174,38 @@ LGE.ENTITIES.CollidableMeshEntity = extendTHREEClass(THREE.Mesh,$.extend(Object.
 				)
 			){
 				this.velocity.z *= this.repel * -1;
-				if(Math.abs(this.velocity.z)<this.precision){
-					this.velocity.z = 0;
-				}
 				this.velocity.x /= this.friction.x+1;
 				this.velocity.y /= this.friction.y+1;
 			}
 		}
+		if(Math.abs(this.velocity.x)<this.precision){
+			this.velocity.x = 0;
+		}else if(this.velocity.x > LGE.ENTITIES.MoveableEntity.maxVelocity){
+			this.velocity.x = LGE.ENTITIES.MoveableEntity.maxVelocity;
+		}else if(this.velocity.x < LGE.ENTITIES.MoveableEntity.maxVelocity *-1){
+			this.velocity.x = LGE.ENTITIES.MoveableEntity.maxVelocity*-1;
+		}
+		if(Math.abs(this.velocity.y)<this.gravity+this.precision && hitsGround){
+			this.velocity.y = 0;
+		}else if(this.velocity.y > LGE.ENTITIES.MoveableEntity.maxVelocity){
+			this.velocity.y = LGE.ENTITIES.MoveableEntity.maxVelocity;
+		}else if(this.velocity.y < LGE.ENTITIES.MoveableEntity.maxVelocity *-1){
+			this.velocity.y = LGE.ENTITIES.MoveableEntity.maxVelocity*-1;
+		}
+		if(Math.abs(this.velocity.z)<this.precision){
+			this.velocity.z = 0;
+		}else if(this.velocity.z > LGE.ENTITIES.MoveableEntity.maxVelocity){
+			this.velocity.z = LGE.ENTITIES.MoveableEntity.maxVelocity;
+		}else if(this.velocity.z < LGE.ENTITIES.MoveableEntity.maxVelocity *-1){
+			this.velocity.z = LGE.ENTITIES.MoveableEntity.maxVelocity*-1;
+		}
 		this.position.addSelf(this.velocity);
+		
 		this.velocity.y -= this.gravity;
 	}
+},{
+	defaultCollisionNear:0
+	,defaultCollisionFar:Number.MAX_VALUE
 }));
 
 LGE.ENTITIES.POVCameraEntity = LGE.ENTITIES.MoveableEntity.extend({

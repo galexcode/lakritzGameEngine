@@ -21,9 +21,9 @@ var CollisionScreen = LGE.SceneInspectorScreen.extend({
 
 		room.position.y = 499;
 		roomMat.side = THREE.BackSide;
-		this.camera.position.y = 500;
+		this.camera.position.y = 600;
 		this.camera.position.z = 1500;
-		this.camera.rotation = new THREE.Vector3();
+	
 		this.scene.add(room);
 
 		var light = new THREE.PointLight(0xffffff,.5);
@@ -32,11 +32,11 @@ var CollisionScreen = LGE.SceneInspectorScreen.extend({
 		var box;
 		for(var i=0; i<100; i++){
 			box = new LGE.ENTITIES.CollidableMeshEntity(
-				new THREE.CubeGeometry(randRangeInt(50,50),randRangeInt(50,50),randRangeInt(50,50))
+				new THREE.CubeGeometry(randRangeInt(80,100),randRangeInt(80,100),randRangeInt(80,100))
 				,new THREE.MeshLambertMaterial({color:randRangeInt(0,0xffffff)})
 				,new THREE.Vector3(randRange(-10,10),randRange(0,15),randRange(-10,10))
-				,new THREE.Vector3(.06,.06,.06)
-				,.5
+				,new THREE.Vector3(.005,.005,.005)
+				,2
 				,.3
 			);
 			box.position.y = 500;
@@ -50,7 +50,7 @@ var CollisionScreen = LGE.SceneInspectorScreen.extend({
 				t.randomize();
 			}
 		});
-
+		//this.camera.position = this.boxes[0].position;
 	}
 	,randomize:function(){
 		var boxIndex = this.boxes.length;
@@ -67,11 +67,14 @@ var CollisionScreen = LGE.SceneInspectorScreen.extend({
 		while(boxIndex--){
 			this.boxes[boxIndex].collides(this.collisionList);
 			this.boxes[boxIndex].update(delta);
-			with(this.boxes[boxIndex].velocity){
+			
+			/*with(this.boxes[boxIndex].velocity){
+				if(!boxIndex)
+					console.log(x,y,z);
 				if(!x&&!y&&!z){
 					t.randomizeBox(t.boxes[boxIndex]);
 				}
-			}
+			}*/
 		}
 	}
 });
