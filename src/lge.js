@@ -217,7 +217,7 @@ var extendTHREEClass = function(parent,protoProps,staticProps){
 }
 
 var LGE = window.LGE = {
-	VERSION:"0.0.01 pre-alpha"
+	VERSION:"0.0.02 pre-alpha"
 };
 
 //htmlLauncher
@@ -250,6 +250,7 @@ LGE.Game = lakritz.Model.extend({
 	lastRender:0,
 	inputProcessor:null,
 	fullscreen:false,
+	maximized:false,
 	rendererParameters:{
 		precision:"mediump",
 		antialias:true,
@@ -404,6 +405,7 @@ LGE.Game = lakritz.Model.extend({
 	setFullScreen:function(fullscreen){
 		if(!fullScreenApi.supportsFullScreen){
 			fullscreen = false;
+			this.setMaximized(fullscreen);
 		}else{
 			if(fullscreen && !this.fullscreen){
 				this.widthBeforeFullScreen = this.width;
@@ -418,26 +420,54 @@ LGE.Game = lakritz.Model.extend({
 	getFullScreen:function(){
 		return this.fullscreen;
 	},
+	setMaximized:function(maximize){
+		if(this.maximized == maximize){
+			return this;
+		}
+		this.maximized = maximize;
+		if(maximize){
+			this.widthBeforeFullScreen = this.width;
+			this.heightBeforeFullScreen = this.height;	
+			this.el.css({
+				'position':'absolute',
+				'top':0,
+				'left':0
+			});
+			this.setSize($("html").innerWidth(),$("html").innerHeight());
+			$(document.body).css('overflow','hidden');
+		}else{
+			this.el.css('position','relative');
+			$(document.body).css('overflow','auto');
+			this.setSize(
+				this.widthBeforeFullScreen,
+				this.heightBeforeFullScreen
+			);
+		}
+		return this;
+	},
+	getMaximized:function(){
+		return this.maximized;
+	},
 	renderLoop:function(){
 		if(this.paused || !this.screen){
 			return;
 		}
-		var tsUpdate = Date.now();
-		
-		if(!this.bypassRendering)
-			this.renderer.render(this.screen.scene,this.screen.camera);
-		
-		this.debugGraphObject&&this.debugGraphObject.update();
+		var t=this;
+		//Reihenfolge 1. Timeout, 2. logik, 3. render, enorm am schnellsten, aber teilweise merkwürdig ruckelig
 
-		//rendern vor dem update ist wesentlich schneller
+		//Getestet mit requestAnimFrame, max fps 60, mit herben einbrüchen, setTimeout stabil bei 100FPS!
+		setTimeout(function(){t.renderLoop();},this.renderRate<this.updateRate?this.renderRate:this.updateRate);
+		//requestAnimFrame(function(){t.renderLoop();})
+
+		var tsUpdate = Date.now();
 		if( tsUpdate - this.lastUpdate > this.updateRate){
 			this.lastUpdate = tsUpdate;
 			this.screen.update(tsUpdate);
 		}
-		var t=this;
-		//Getestet mit requestAnimFrame, max fps 60, mit herben einbrüchen, setTimeout stabil bei 100FPS!
-		setTimeout(function(){t.renderLoop();},this.renderRate<this.updateRate?this.renderRate:this.updateRate);
-		//requestAnimFrame(function(){t.renderLoop();})
+		this.debugGraphObject&&this.debugGraphObject.update();
+
+		if(!this.bypassRendering)
+			this.renderer.render(this.screen.scene,this.screen.camera);
 	}
 });
 
@@ -462,6 +492,10 @@ LGE.GameWidget = LGE.Game.extend({
 				case LGE.InputProcessor.SPACE:
 					if(this.isPressed(LGE.InputProcessor.CTRL))
 						t.setPaused(!t.getPaused());
+				break;
+				case LGE.InputProcessor.BACKSPACE:
+					if(this.isPressed(LGE.InputProcessor.CTRL))
+						t.setMaximized(!t.getMaximized());
 				break;
 				case LGE.InputProcessor.ENTER:
 					if(this.isPressed(LGE.InputProcessor.CTRL))
@@ -976,16 +1010,177 @@ LGE.ENTITIES.Entity = extendTHREEClass(THREE.Object3D,{
 LGE.ENTITIES.MoveableEntity = LGE.ENTITIES.Entity.extend({
 	velocity:null
 	,friction:null
-	,init:function(velocity,friction){
+	,gravity:0
+	,init:function(velocity,friction,gravity){
 		LGE.ENTITIES.Entity.prototype.init.call(this);
 		this.velocity = velocity||(new THREE.Vector3());
 		this.friction = friction||(new THREE.Vector3(.5,0,.5));
+		this.gravity = !isNaN(gravity)?gravity:0;
 	}
 	,update:function(delta){
 		this.position.addSelf(this.velocity);
 		this.velocity.divideSelf({x:this.friction.x+1, y:this.friction.y+1, z:this.friction.z+1});
+		this.velocity.y -= this.gravity;
 	}
 });
+
+LGE.ENTITIES.MoveableCollisionEntity = LGE.ENTITIES.MoveableEntity.extend({
+	collisionBox:null
+	,init:function(velocity,friction,collisionBox){
+		LGE.ENTITIES.MoveableCollisionEntity.__super__.init.call(this,velocity,friction);
+		if(collisionBox instanceof THREE.Vector3){
+			this.collisionBox = collisionBox;
+		}
+	}
+	,collides:function(collidableMeshList){
+
+	}
+});
+
+//Nasty extension hack, could be nicer, but works for now...
+LGE.ENTITIES.CollidableMeshEntity = extendTHREEClass(THREE.Mesh,$.extend(Object.create(LGE.ENTITIES.MoveableEntity),{
+	lastCollision:{tfl:false,tfr:false,tbl:false,tbr:false,bfl:false,bfr:false,bbl:false,bbr:false,collides:false}
+	,repel:0
+	,precision:2
+	,autoCollisionAgainst:null
+	,init:function(geometry,material,velocity,friction,gravity,repel){
+		THREE.Mesh.call(this, geometry, material);
+		LGE.ENTITIES.MoveableEntity.prototype.init.call(this, velocity, friction,gravity);
+		this.repel = !isNaN(repel)?repel:0;
+	}
+	,collides:function(collidableMeshList){
+		var 
+		originPoint = this.position.clone()
+		,vertexIndex = this.geometry.vertices.length
+		,localVertex
+		,globalVertex
+		,directionVector
+		,ray
+		,collisions
+		,hitdirections = {tfl:false,tfr:false,tbl:false,tbr:false,bfl:false,bfr:false,bbl:false,bbr:false,collides:false};
+		
+		while(vertexIndex--){
+			localVertex = this.geometry.vertices[vertexIndex].clone();
+			globalVertex = this.matrix.multiplyVector3(localVertex);
+			directionVector = globalVertex.subSelf(this.position);
+			ray = new THREE.Ray(originPoint,directionVector.clone().normalize());
+			collisions = ray.intersectObjects(collidableMeshList);
+			if(collisions.length && collisions[0].distance < directionVector.length()){
+				with(directionVector){
+					if(x<0&&y>=0&&z>=0){// Vorne Links Oben Ray
+						hitdirections.tfl = true;
+						hitdirections.collides = true;
+					}else if(x>=0&&y>=0&&z>=0){ // Vorne Rechts Oben Ray
+						hitdirections.tfr = true;
+						hitdirections.collides = true;
+					}else if(x<0&&y>=0&&z<0){ // Hinten Links Oben
+						hitdirections.tbl = true;
+						hitdirections.collides = true;
+					}else if(x>=0&&y>=0&&z<0){ // Hinten Rechts Oben
+						hitdirections.tbr = true;
+						hitdirections.collides = true;
+					}else if(x<0&&y<0&&z>=0){ // Vorne Links Unten
+						hitdirections.bfl = true;
+						hitdirections.collides = true;
+					}else if(x>=0&&y<0&&z>=0){ // Vorne Rechts Unten
+						hitdirections.bfr = true;
+						hitdirections.collides = true;
+					}else if(x<0&&y<0&&z<0){ // Hinten Links Unten
+						hitdirections.bbl = true;
+						hitdirections.collides = true;
+					}else if(x>=0&&y<0&&z<0){ // Hinten Rechts Unten
+						hitdirections.bbr = true;
+						hitdirections.collides = true;
+					}
+				}
+			}		
+		}
+		return (this.lastCollision = hitdirections);
+	}
+	,update:function(delta){
+		if(this.autoCollisionAgainst){
+			this.collides(this.autoCollisionAgainst);
+		}
+		if(this.lastCollision.collides){
+			//Collision on x axis			
+			if
+			(
+				(this.velocity.x > 0 && 
+					(
+						(this.lastCollision.tfr&&this.lastCollision.bbr) &&
+						(this.lastCollision.tbr&&this.lastCollision.bfr)
+					)
+				)
+				||
+				(this.velocity.x < 0 && 
+					(
+						(this.lastCollision.tfl&&this.lastCollision.bbl) &&
+						(this.lastCollision.tbl&&this.lastCollision.bfl)
+					)
+				)
+			){
+				this.velocity.x *= this.repel * -1;
+				if(Math.abs(this.velocity.x)<this.precision){
+					this.velocity.x = 0;
+				}
+				this.velocity.y /= this.friction.y+1;
+				this.velocity.z /= this.friction.z+1;
+			}
+
+			//Collision on y axis			
+			if
+			(
+				(this.velocity.y > 0 && 
+					(
+						(this.lastCollision.tfr&&this.lastCollision.tbl) &&
+						(this.lastCollision.tfl&&this.lastCollision.tbr)
+					)
+				)
+				||
+				(this.velocity.y < 0 && 
+					(
+						(this.lastCollision.bfr&&this.lastCollision.bbl) &&
+						(this.lastCollision.bfl&&this.lastCollision.bbr)
+					)
+				)
+			){
+				this.velocity.y *= this.repel * -1;
+				if(Math.abs(this.velocity.y)<this.precision){
+					this.velocity.y = 0;
+				}
+				this.velocity.x /= this.friction.x+1;
+				this.velocity.z /= this.friction.z+1;
+			}
+
+			//Collision on z axis			
+			if
+			(
+				(this.velocity.z > 0 && 
+					(
+						(this.lastCollision.tfr&&this.lastCollision.bfl) &&
+						(this.lastCollision.tfl&&this.lastCollision.bfr)
+					)
+				)
+				||
+				(this.velocity.z < 0 && 
+					(
+						(this.lastCollision.tbl&&this.lastCollision.bbr) &&
+						(this.lastCollision.tbr&&this.lastCollision.bbl)
+					)
+				)
+			){
+				this.velocity.z *= this.repel * -1;
+				if(Math.abs(this.velocity.z)<this.precision){
+					this.velocity.z = 0;
+				}
+				this.velocity.x /= this.friction.x+1;
+				this.velocity.y /= this.friction.y+1;
+			}
+		}
+		this.position.addSelf(this.velocity);
+		this.velocity.y -= this.gravity;
+	}
+}));
 
 LGE.ENTITIES.POVCameraEntity = LGE.ENTITIES.MoveableEntity.extend({
 	camera:null
@@ -1306,6 +1501,23 @@ LGE.SceneInspectorScreen = LGE.Screen.extend({
 		camController.getObject3D().position.set(0,100,300);
 		camController.rotatePOV(new THREE.Vector3(deg2rad(-25)));
 	}
+});
+
+
+LGE.Assets = lakritz.Singleton.extend({
+	add:function(name,file){
+		if(lakritz.isObject(name)){
+			$.extend(LGE.Assets.files,name);
+		}else if(lakritz.isString(name) && lakritz.isString(file)){
+			LGE.Assets.files[name] = file;
+		}
+		return this;
+	},
+	get:function(name){
+		return LGE.Assets.files[name];
+	}
+},{
+	files:{}
 });
 
 }(jQuery,THREE,lakritz);
