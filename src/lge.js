@@ -453,11 +453,7 @@ LGE.Game = lakritz.Model.extend({
 			return;
 		}
 		var t=this;
-		//Reihenfolge 1. Timeout, 2. logik, 3. render, enorm am schnellsten, aber teilweise merkwürdig ruckelig
-
-		//Getestet mit requestAnimFrame, max fps 60, mit herben einbrüchen, setTimeout stabil bei 100FPS!
-		setTimeout(function(){t.renderLoop();},this.renderRate<this.updateRate?this.renderRate:this.updateRate);
-		//requestAnimFrame(function(){t.renderLoop();})
+		requestAnimFrame(function(){t.renderLoop();});
 
 		var tsUpdate = Date.now();
 		if( tsUpdate - this.lastUpdate > this.updateRate){
@@ -1010,12 +1006,12 @@ LGE.ENTITIES.Entity = extendTHREEClass(THREE.Object3D,{
 LGE.ENTITIES.MoveableEntity = LGE.ENTITIES.Entity.extend({
 	velocity:null
 	,friction:null
-	,gravity:0
+	,gravity:1
 	,init:function(velocity,friction,gravity){
 		LGE.ENTITIES.Entity.prototype.init.call(this);
 		this.velocity = velocity||(new THREE.Vector3());
-		this.friction = friction||(new THREE.Vector3(.5,0,.5));
-		this.gravity = !isNaN(gravity)?gravity:0;
+		this.friction = friction||(new THREE.Vector3(.5,.5,.5));
+		this.gravity = !isNaN(gravity)?gravity:1;
 	}
 	,update:function(delta){
 		this.position.addSelf(this.velocity);
@@ -1027,78 +1023,34 @@ LGE.ENTITIES.MoveableEntity = LGE.ENTITIES.Entity.extend({
 	maxVelocity:35
 });
 
-LGE.ENTITIES.MoveableCollisionEntity = LGE.ENTITIES.MoveableEntity.extend({
-	collisionBox:null
-	,init:function(velocity,friction,collisionBox){
-		LGE.ENTITIES.MoveableCollisionEntity.__super__.init.call(this,velocity,friction);
-		if(collisionBox instanceof THREE.Vector3){
-			this.collisionBox = collisionBox;
-		}
-	}
-	,collides:function(collidableMeshList){
-
+LGE.ENTITIES.Collision = lakritz.Model.extend({
+	tfl:false
+	,tfr:false
+	,tbl:false
+	,tbr:false
+	,bfl:false
+	,bfr:false
+	,bbl:false
+	,bbr:false
+	,collides:false
+	,init:undefined
+	,constructor:function(params){
+		$.extend(this,params);
 	}
 });
 
-//Nasty extension hack, could be nicer, but works for now...
-LGE.ENTITIES.CollidableMeshEntity = extendTHREEClass(THREE.Mesh,$.extend(Object.create(LGE.ENTITIES.MoveableEntity),{
-	lastCollision:{tfl:false,tfr:false,tbl:false,tbr:false,bfl:false,bfr:false,bbl:false,bbr:false,collides:false}
-	,repel:0
+LGE.ENTITIES.CollidableEntityAbstract = LGE.ENTITIES.MoveableEntity.extend({
+	lastCollision:null
+	,repel:.1
 	,precision:.1
 	,autoCollisionAgainst:null
-	,init:function(geometry,material,velocity,friction,gravity,repel){
-		THREE.Mesh.call(this, geometry, material);
-		LGE.ENTITIES.MoveableEntity.prototype.init.call(this, velocity, friction,gravity);
-		this.repel = !isNaN(repel)?repel:0;
+	,init:function(velocity,friction,gravity,repel){
+		LGE.ENTITIES.CollidableEntityAbstract.__super__.init.call(this,velocity,friction,gravity);
+		this.repel = !isNaN(repel)?repel:.1;
 	}
+	//abstract
 	,collides:function(collidableMeshList){
-		var 
-		originPoint = this.position.clone()
-		,vertexIndex = this.geometry.vertices.length
-		,localVertex
-		,globalVertex
-		,directionVector
-		,ray
-		,collisions
-		,hitdirections = {tfl:false,tfr:false,tbl:false,tbr:false,bfl:false,bfr:false,bbl:false,bbr:false,collides:false};
-		
-		while(vertexIndex--){
-			localVertex = this.geometry.vertices[vertexIndex].clone();
-			globalVertex = this.matrix.multiplyVector3(localVertex);
-			directionVector = globalVertex.subSelf(this.position);
-			ray = new THREE.Ray(originPoint,directionVector.clone().normalize(),LGE.ENTITIES.CollidableMeshEntity.defaultCollisionNear,LGE.ENTITIES.CollidableMeshEntity.defaultCollisionFar );
-			collisions = ray.intersectObjects(collidableMeshList);
-			if(collisions.length && collisions[0].distance < directionVector.length()){
-				with(directionVector){
-					if(x<0&&y>=0&&z>=0){// Vorne Links Oben Ray
-						hitdirections.tfl = true;
-						hitdirections.collides = true;
-					}else if(x>=0&&y>=0&&z>=0){ // Vorne Rechts Oben Ray
-						hitdirections.tfr = true;
-						hitdirections.collides = true;
-					}else if(x<0&&y>=0&&z<0){ // Hinten Links Oben
-						hitdirections.tbl = true;
-						hitdirections.collides = true;
-					}else if(x>=0&&y>=0&&z<0){ // Hinten Rechts Oben
-						hitdirections.tbr = true;
-						hitdirections.collides = true;
-					}else if(x<0&&y<0&&z>=0){ // Vorne Links Unten
-						hitdirections.bfl = true;
-						hitdirections.collides = true;
-					}else if(x>=0&&y<0&&z>=0){ // Vorne Rechts Unten
-						hitdirections.bfr = true;
-						hitdirections.collides = true;
-					}else if(x<0&&y<0&&z<0){ // Hinten Links Unten
-						hitdirections.bbl = true;
-						hitdirections.collides = true;
-					}else if(x>=0&&y<0&&z<0){ // Hinten Rechts Unten
-						hitdirections.bbr = true;
-						hitdirections.collides = true;
-					}
-				}
-			}		
-		}
-		return (this.lastCollision = hitdirections);
+		return new LGE.ENTITIES.Collision;
 	}
 	/**
 	* TODO if the change in Position is bigger than the actual mesh itself, collision detection fails on Planes, because the mesh practically teleports
@@ -1110,7 +1062,7 @@ LGE.ENTITIES.CollidableMeshEntity = extendTHREEClass(THREE.Mesh,$.extend(Object.
 			this.collides(this.autoCollisionAgainst);
 		}
 
-		if(this.lastCollision.collides){
+		if(this.lastCollision && this.lastCollision.collides){
 			//Collision on x axis			
 			if
 			(
@@ -1200,13 +1152,161 @@ LGE.ENTITIES.CollidableMeshEntity = extendTHREEClass(THREE.Mesh,$.extend(Object.
 			this.velocity.z = LGE.ENTITIES.MoveableEntity.maxVelocity*-1;
 		}
 		this.position.addSelf(this.velocity);
-		
 		this.velocity.y -= this.gravity;
 	}
 },{
 	defaultCollisionNear:0
 	,defaultCollisionFar:Number.MAX_VALUE
+});
+
+LGE.ENTITIES.CollidableHitboxEntity = LGE.ENTITIES.CollidableEntityAbstract.extend({
+	hitbox:null
+	,hitboxVisible:false
+	,hitboxColor:0
+	,init:function(width,height,depth,velocity,friction,gravity,repel){
+		LGE.ENTITIES.CollidableHitboxEntity.__super__.init.call(this,velocity,friction,gravity,repel);
+		width = width||10;
+		height= height||10;
+		depth = depth||10;
+		this.hitbox = new THREE.Mesh(
+			new THREE.CubeGeometry(width,height,depth)
+			,new THREE.MeshBasicMaterial({color:this.hitboxColor||(this.hitboxColor = randRangeInt(0,0xffffff)),wireframe:true})
+		);
+		this.setHitboxVisible(this.hitboxVisible);		
+		this.add(this.hitbox);
+	}
+	,setHitboxVisible:function(b){
+		this.hitboxVisible = this.hitbox.visible = b;
+		return this;
+	}
+	,getHitboxVisible:function(){
+		return this.hitboxVisible;
+	}
+	,collides:function(collidableMeshList){
+		if(!this.hitbox){
+			return new LGE.ENTITIES.Collision; 
+		}
+
+		var 
+		originPoint = this.position.clone().addSelf(this.hitbox.position)
+		,vertexIndex = this.hitbox.geometry.vertices.length
+		,localVertex
+		,globalVertex
+		,directionVector
+		,ray
+		,collisions
+		,hitdirections = new LGE.ENTITIES.Collision;
+		while(vertexIndex--){
+			localVertex = this.hitbox.geometry.vertices[vertexIndex].clone();
+			globalVertex = this.matrix.multiplyVector3(localVertex).addSelf(this.hitbox.matrix.multiplyVector3(localVertex));
+			directionVector = globalVertex.subSelf(originPoint);
+			ray = new THREE.Ray(
+				originPoint,directionVector.clone().normalize(),
+				LGE.ENTITIES.CollidableEntityAbstract.defaultCollisionNear,
+				LGE.ENTITIES.CollidableEntityAbstract.defaultCollisionFar 
+			);
+			collisions = ray.intersectObjects(collidableMeshList);
+			if(collisions.length && collisions[0].distance < directionVector.length()){
+				with(directionVector){
+					if(x<0&&y>=0&&z>=0){// Vorne Links Oben Ray
+						hitdirections.tfl = true;
+						hitdirections.collides = true;
+					}else if(x>=0&&y>=0&&z>=0){ // Vorne Rechts Oben Ray
+						hitdirections.tfr = true;
+						hitdirections.collides = true;
+					}else if(x<0&&y>=0&&z<0){ // Hinten Links Oben
+						hitdirections.tbl = true;
+						hitdirections.collides = true;
+					}else if(x>=0&&y>=0&&z<0){ // Hinten Rechts Oben
+						hitdirections.tbr = true;
+						hitdirections.collides = true;
+					}else if(x<0&&y<0&&z>=0){ // Vorne Links Unten
+						hitdirections.bfl = true;
+						hitdirections.collides = true;
+					}else if(x>=0&&y<0&&z>=0){ // Vorne Rechts Unten
+						hitdirections.bfr = true;
+						hitdirections.collides = true;
+					}else if(x<0&&y<0&&z<0){ // Hinten Links Unten
+						hitdirections.bbl = true;
+						hitdirections.collides = true;
+					}else if(x>=0&&y<0&&z<0){ // Hinten Rechts Unten
+						hitdirections.bbr = true;
+						hitdirections.collides = true;
+					}
+				}
+			}		
+		}
+		if(this.hitboxVisible){
+			if(hitdirections.collides){
+				this.hitbox.material.color.setHex(0xff0000);
+			}else{
+				this.hitbox.material.color.setHex(this.hitboxColor);
+			}
+		}
+		return (this.lastCollision = hitdirections);
+	}
+});
+
+//Nasty extension hack, could be nicer, but works for now...
+LGE.ENTITIES.CollidableMeshEntity = extendTHREEClass(THREE.Mesh,$.extend(Object.create(LGE.ENTITIES.CollidableEntityAbstract.prototype),{
+	init:function(geometry,material,velocity,friction,gravity,repel){
+		THREE.Mesh.call(this, geometry, material);
+		LGE.ENTITIES.CollidableEntityAbstract.prototype.init.call(this, velocity, friction, gravity, repel);
+	}
+	,collides:function(collidableMeshList){
+		var 
+		originPoint = this.position.clone()
+		,vertexIndex = this.geometry.vertices.length
+		,localVertex
+		,globalVertex
+		,directionVector
+		,ray
+		,collisions
+		,hitdirections = new LGE.ENTITIES.Collision;	
+		while(vertexIndex--){
+			localVertex = this.geometry.vertices[vertexIndex].clone();
+			globalVertex = this.matrix.multiplyVector3(localVertex);
+			directionVector = globalVertex.subSelf(this.position);
+			ray = new THREE.Ray(
+				originPoint,directionVector.clone().normalize(),
+				LGE.ENTITIES.CollidableEntityAbstract.defaultCollisionNear,
+				LGE.ENTITIES.CollidableEntityAbstract.defaultCollisionFar 
+			);
+			collisions = ray.intersectObjects(collidableMeshList);
+			if(collisions.length && collisions[0].distance < directionVector.length()){
+				with(directionVector){
+					if(x<0&&y>=0&&z>=0){// Vorne Links Oben Ray
+						hitdirections.tfl = true;
+						hitdirections.collides = true;
+					}else if(x>=0&&y>=0&&z>=0){ // Vorne Rechts Oben Ray
+						hitdirections.tfr = true;
+						hitdirections.collides = true;
+					}else if(x<0&&y>=0&&z<0){ // Hinten Links Oben
+						hitdirections.tbl = true;
+						hitdirections.collides = true;
+					}else if(x>=0&&y>=0&&z<0){ // Hinten Rechts Oben
+						hitdirections.tbr = true;
+						hitdirections.collides = true;
+					}else if(x<0&&y<0&&z>=0){ // Vorne Links Unten
+						hitdirections.bfl = true;
+						hitdirections.collides = true;
+					}else if(x>=0&&y<0&&z>=0){ // Vorne Rechts Unten
+						hitdirections.bfr = true;
+						hitdirections.collides = true;
+					}else if(x<0&&y<0&&z<0){ // Hinten Links Unten
+						hitdirections.bbl = true;
+						hitdirections.collides = true;
+					}else if(x>=0&&y<0&&z<0){ // Hinten Rechts Unten
+						hitdirections.bbr = true;
+						hitdirections.collides = true;
+					}
+				}
+			}		
+		}
+		return (this.lastCollision = hitdirections);
+	}
 }));
+
 
 LGE.ENTITIES.POVCameraEntity = LGE.ENTITIES.MoveableEntity.extend({
 	camera:null
