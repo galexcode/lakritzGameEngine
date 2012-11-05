@@ -170,7 +170,7 @@ var MenuScreen = LGE.SceneInspectorScreen.extend({
 
 		if(ip.isPressed(ip.keys.KEY_A)){
 			mVec.x -= s;
-			this.isrunning = true;
+			this.isrunning = true;	
 		}
 
 		if(ip.isPressed(ip.keys.KEY_S)){

@@ -2,7 +2,7 @@ var Example = LGE.GameWidget.extend({
 	usePointerLock:false
 	,init:function(container){
 		LGE.GameWidget.prototype.init.call(this,container);
-		this.setScreen(new CollisionScreen2(this));
+		this.setScreen(new CollisionScreen(this));
 	}
 });
 
@@ -28,7 +28,7 @@ var CollisionScreen = LGE.SceneInspectorScreen.extend({
 		this.camera.position.y = 600;
 		this.camera.position.z = 1500;
 	
-		//this.scene.add(room);
+		this.scene.add(room);
 
 		var roomOuter =  new THREE.Mesh(
 			new THREE.CubeGeometry(5000,300,5000)
@@ -75,7 +75,7 @@ var CollisionScreen = LGE.SceneInspectorScreen.extend({
 			this.boxes.push(box);
 			this.scene.add(box);
 		}
-		this.collisionList = [roomOuter];
+		this.collisionList = [room];
 		//this.collisionList = this.boxes.concat([room,roomOuter]);
 		var t=this;
 		this.game.getInputProcessor().bind("keyup",function(e){
@@ -124,10 +124,11 @@ var CollisionScreen2 = LGE.SceneInspectorScreen.extend({
 		this.hb.gravity = .1;
 		this.hb.velocity.x = .5;
 		this.hb.setHitboxVisible(true);
-		this.hb.add(new THREE.Mesh(
+		var t=this, s = new THREE.Mesh(
 			new THREE.SphereGeometry(25,64,64)
 			,new THREE.MeshPhongMaterial()
-		));
+		);
+		this.hb.add(s);
 	}
 	,update:function(delta){
 		this.hb.collides([this.ground])
