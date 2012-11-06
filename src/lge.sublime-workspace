@@ -1,0 +1,668 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"hit",
+				"hitdirections"
+			],
+			[
+				"lastMouse",
+				"lastMouseY"
+			],
+			[
+				"last",
+				"lastMouseX"
+			],
+			[
+				"hitbox",
+				"hitboxVisible"
+			],
+			[
+				"Colli",
+				"CollisionScreen2"
+			],
+			[
+				"show",
+				"showHitbox"
+			],
+			[
+				"auto",
+				"autoCollisionAgainst"
+			],
+			[
+				"room",
+				"roomOuter"
+			],
+			[
+				"defa",
+				"defaultCollisionFar"
+			],
+			[
+				"rand",
+				"randomizeBox"
+			],
+			[
+				"ra",
+				"randomizeBox"
+			],
+			[
+				"coll",
+				"collides"
+			],
+			[
+				"vert",
+				"vertexIndex"
+			],
+			[
+				"init",
+				"initTexture"
+			],
+			[
+				"pack",
+				"packItems"
+			],
+			[
+				"loader",
+				"loaderClass"
+			],
+			[
+				"map",
+				"mapEntities"
+			],
+			[
+				"extend",
+				"extendTHREEClass"
+			],
+			[
+				"move",
+				"moveSpeed"
+			],
+			[
+				"speed",
+				"moveSpeedZoomed"
+			],
+			[
+				"wa",
+				"weaponZoomed"
+			],
+			[
+				"weap",
+				"weaponswingAnim"
+			],
+			[
+				"zo",
+				"weaponZoomed"
+			],
+			[
+				"getCamera",
+				"getCameraTrain"
+			],
+			[
+				"block",
+				"blockMaterial"
+			],
+			[
+				"shooting",
+				"shootingAnim"
+			],
+			[
+				"weapon",
+				"weaponZoomAnim"
+			],
+			[
+				"w",
+				"weaponZoomAnim"
+			],
+			[
+				"get",
+				"getCamera"
+			],
+			[
+				"update",
+				"updateProjectionMatrix"
+			],
+			[
+				"Mesh",
+				"MeshPhongMaterial"
+			],
+			[
+				"proto",
+				"prototype"
+			],
+			[
+				"Obj",
+				"Object3D"
+			],
+			[
+				"mousemove",
+				"mousemoveCallback"
+			],
+			[
+				"mouse",
+				"mouseLook"
+			],
+			[
+				"pointer",
+				"pointerLockApi"
+			],
+			[
+				"setup",
+				"setupFullScreenListener"
+			],
+			[
+				"fullsc",
+				"fullscreen"
+			],
+			[
+				"fullS",
+				"fullScreenApi"
+			],
+			[
+				"width",
+				"widthBeforeFullScreen"
+			],
+			[
+				"height",
+				"heightBeforeFullScreen"
+			],
+			[
+				"isFu",
+				"isFullScreen"
+			],
+			[
+				"MOU",
+				"MOUSE1"
+			],
+			[
+				"su",
+				"supportsFullScreen"
+			],
+			[
+				"full",
+				"fullScreenApi"
+			],
+			[
+				"add",
+				"addAxisCross"
+			],
+			[
+				"camera",
+				"cameraLookSpeed"
+			],
+			[
+				"ball",
+				"ballz"
+			],
+			[
+				"0x",
+				"0xBBBBBB"
+			],
+			[
+				"grid",
+				"gridColor"
+			],
+			[
+				"Line",
+				"LinePieces"
+			],
+			[
+				"anim",
+				"animations"
+			],
+			[
+				"ARROW",
+				"ARROWUP"
+			],
+			[
+				"parti",
+				"particleSystem"
+			],
+			[
+				"upda",
+				"updateRate"
+			],
+			[
+				"upd",
+				"updateRate"
+			],
+			[
+				"debug",
+				"debugGraphObject"
+			],
+			[
+				"debugGrap",
+				"debugGraphObject"
+			],
+			[
+				"deb",
+				"debugGraphObject"
+			],
+			[
+				"tex",
+				"textureMaterial"
+			],
+			[
+				"request",
+				"requestAnimFrame"
+			],
+			[
+				"came",
+				"cameraFar"
+			],
+			[
+				"cam",
+				"cameraViewAngle"
+			],
+			[
+				"bounds",
+				"boundsRect"
+			],
+			[
+				"pos",
+				"positonVec2"
+			],
+			[
+				"Dis",
+				"DISPLAY_HEIGHT"
+			],
+			[
+				"DIS",
+				"DISPLAY_HEIGHT"
+			],
+			[
+				"cros",
+				"crossPos"
+			],
+			[
+				"d",
+				"diagrammVector"
+			],
+			[
+				"dia",
+				"diagrammVecDiv"
+			],
+			[
+				"Ax",
+				"AxBVereinigtBxA"
+			],
+			[
+				"write",
+				"writeMenge"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "lge/game/screen/screen.js",
+			"settings":
+			{
+				"buffer_size": 1416,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "Packages/User/Lakritz Core.sublime-build",
+	"command_palette":
+	{
+		"height": 58.0,
+		"selected_items":
+		[
+			[
+				"folder",
+				"Project: Add Folder"
+			],
+			[
+				"open side",
+				"View: Toggle Open Files in Side Bar"
+			]
+		],
+		"width": 392.0
+	},
+	"console":
+	{
+		"height": 193.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Users/Vicious/AppData/Roaming/Sublime Text 2/Packages/User/Lakritz Core.sublime-build",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/utils/build.py",
+		"/C/Users/Vicious/AppData/Roaming/Sublime Text 2/Packages/User/Default (Windows).sublime-keymap",
+		"/C/Users/Vicious/AppData/Roaming/Sublime Text 2/Packages/Default/Default (Windows).sublime-keymap",
+		"/C/Users/Vicious/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/build/lge.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/utils/build.bat",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/utils/externs/all.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/all.json",
+		"/D/Work/Projekte/lakritz/three.js/utils/build.py",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/entities/collidablehitboxentity.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/game/povcameracontroller.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/math.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/utils.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/game/screen/sceneinspectorscreen.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/examples/example.html",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/build/lge.min.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/entities/povcameraentity.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/game/game.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/animation/animation.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/utils/externals/all.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/entities/collidablemeshentity.js",
+		"/D/Work/Projekte/lakritz/three.js/utils/build.bat",
+		"/D/Work/Projekte/lakritz/three.js/utils/externs/extras.js",
+		"/D/Work/Projekte/lakritz/three.js/utils/externs/common.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/build.json",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/lge.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge.js",
+		"/D/Work/Projekte/lakritz/three.js/utils/build.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/assets.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/entities/collidableentityabstract.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/entities/entities.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/entities/collision.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/entities/moveableentity.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/animation/timeout.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/animation/animationqueue.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge.easing.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/animation/easing.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/input/inputprocessor.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/game/screen.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/game/gamewidget.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/shims/pointerlockapi.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/shims/requestanimationframe.js",
+		"/D/Work/Projekte/lakritz/three.js/utils/includes/common.json",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/shims/fullscreenapi.js",
+		"/D/Steam/SteamApps/common/call of duty modern warfare 3/players2/config_mp.cfg",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/examples/example3-collision.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/examples/assets/js/physi.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/examples/example2-fps.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/examples/example5-physijs.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/examples/assets/models/tower/tower.dae",
+		"/C/Users/Vicious/Desktop/test2.html",
+		"/D/Work/Projekte/lakritz/requirejs/testBaseUrl.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/examples/assets/js/physijs_worker.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/examples/assets/js/ammo.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/examples/example1.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/examples/assets/js/lakritz.js",
+		"/C/Users/Vicious/Downloads/Heron.s",
+		"/C/Users/Vicious/AppData/Local/Temp/fz3temp-1/distributors.phtml",
+		"/C/Users/Vicious/AppData/Local/Temp/fz3temp-1/ajax.php",
+		"/C/Users/Vicious/AppData/Local/Temp/fz3temp-1/contacts.js",
+		"/C/Users/Vicious/AppData/Local/Temp/fz3temp-1/geo.js",
+		"/C/Users/Vicious/AppData/Local/Temp/fz3temp-1/contacts.phtml",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/examples/example4-2d.js",
+		"/C/Users/Vicious/Dropbox/Public/threejs/src/example2.js",
+		"/C/Users/Vicious/Dropbox/Public/threejs/src/lge.easing.js",
+		"/C/Users/Vicious/Dropbox/Public/threejs/src/example1.js",
+		"/C/Users/Vicious/Dropbox/Public/threejs/src/lakritz.js",
+		"/C/Users/Vicious/Dropbox/Public/threejs/src/lge.js",
+		"/D/Work/Projekte/lakritz/lakritzJS/lakritz.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/examples/example2.collision.js",
+		"/C/Users/Vicious/Dropbox/Public/threejs/examples/threetest.html",
+		"/C/Users/Vicious/Dropbox/Public/threejs/examples/example2.js",
+		"/C/Users/Vicious/Dropbox/Public/threejs/examples/example1.js",
+		"/C/Users/Vicious/Dropbox/Public/threejs/src/threetest.js",
+		"/D/Work/Projekte/lakritz/three.js/utils/includes/canvas.json",
+		"/C/Users/Vicious/Dropbox/Public/threejs/bin/threetest.html",
+		"/D/Work/Projekte/threejs/src/example1.js",
+		"/D/Work/Projekte/threejs/src/lge.js",
+		"/D/Work/Projekte/threejs/bin/threetest.html",
+		"/D/Work/Projekte/lakritz/lakritz.js",
+		"/D/Work/Projekte/threejs/src/example2.js",
+		"/C/Users/Vicious/Dropbox/Public/threejs/bin/assets/models/m4a1SF.ForrestPL/m4a1SF.js",
+		"/C/Users/Vicious/Downloads/m4a1SF.ForrestPL/m4a1SF.obj",
+		"/D/Work/Projekte/threejs/src/lge.easing.js",
+		"/D/Work/Projekte/h5blitting/js/blitting.js",
+		"/D/Work/Projekte/serienplan/assets/js/quickstart.js",
+		"/C/Windows/System32/drivers/etc/hosts",
+		"/C/Users/Vicious/Desktop/rma/animation_einfach.html",
+		"/C/Users/Vicious/Desktop/rma/animation.html",
+		"/C/Users/Vicious/Desktop/vectest.html",
+		"/D/Work/Projekte/threejs/src/lakritzge.js",
+		"/C/Users/Vicious/Desktop/test.html",
+		"/D/Work/Projekte/lakritz/lakritzJS/views.js",
+		"/D/Work/Server/www/doodles/hurr/quickstart.js"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"rad",
+			"rad2deg",
+			"deg2rad",
+			"rad2deg",
+			"randRange",
+			"prop in",
+			"prop",
+			"prop in",
+			"prop",
+			"z",
+			"y",
+			"x",
+			"y",
+			"x",
+			"LGE",
+			"LGE.Animation = lakritz.Model.extend({\n	_target:null,\n	_values:null,\n	_currentValues:null,\n	_options:null,\n	_initialValues:null,\n	_startValues:null,\n	_interval:null,\n	_startTime:0,\n	_ease:null,\n	_running:false,\n	_isreverse:false,\n	_repeatCount:0,\n	init:function(target,values,options){\n		if(!target||!values){\n			return;\n		}\n		var t=this,prop;\n		this._target = target;\n		this._values = values;\n		this._initialValues = {};\n		\n		this._options = {\n			duration:1000,\n			ease:'linear',\n			delay:0\n		};\n\n		for(prop in this._values){\n			if(this._values.hasOwnProperty(prop)){\n				this._initialValues[prop] = this._target[prop];\n			}\n		}\n\n		if(lakritz.isObject(options)){\n			for(prop in options){\n				if(options.hasOwnProperty(prop)){\n					this._options[prop] = options[prop];\n				}\n			}\n		}\n		\n		this._ease = $.isFunction(this._options.ease)?this._options.ease:LGE.Animation.equations[this._options.ease];\n		if(!$.isFunction(this._ease)){\n			throw new Error(\"Ease is not a function\");\n		}\n		if(options.autostart === true)\n			this.start();\n	},\n	/**\n * starts the animation by creating a new interval, triggers animation:start\n * @returns {void}\n */\n	start:function(isreverse,iteration){\n		var t=this;\n		if(this._isreverse){\n			this._isreverse = !isreverse;\n",
+			"ctor",
+			"fd",
+			".Scene = ",
+			"update",
+			"trigger(evt",
+			"LGE.Screen",
+			"InspectorScreen",
+			"collides",
+			"InputProcessor",
+			"Hex",
+			"ground",
+			"MeshPhong",
+			"LineMaterial",
+			"object.create",
+			"shadow",
+			"maxVelo",
+			"velocity.x",
+			"frict",
+			"collide",
+			"precis",
+			"this.boxes[boxIndex]",
+			"repel",
+			"this",
+			"true",
+			"collidableMeshList",
+			"push",
+			"screen",
+			"../src",
+			"animation",
+			"Mouse2",
+			"5000",
+			"_isreverse",
+			"Screen",
+			"SPACE",
+			"inputproc",
+			"this.",
+			"position",
+			"init",
+			"ctor",
+			"POVCameraEntity",
+			"ENTIIES",
+			"element",
+			"X",
+			"cancelFull",
+			"isFullscreen",
+			"KEY",
+			"ambient",
+			"Animation",
+			"light",
+			"new Date().getTime()",
+			"new",
+			"new Date().getTime()",
+			"x",
+			"0",
+			"x",
+			"spotLight",
+			"Super",
+			"05",
+			"m1",
+			"model1",
+			"add",
+			"d",
+			"new",
+			"new ",
+			"InputProcessor",
+			"Animation",
+			"loop",
+			".\n",
+			"this",
+			".\n",
+			"		\n",
+			"camera",
+			"Camera",
+			"camera",
+			"Camera",
+			"light",
+			"LKConsole",
+			"QuickStart",
+			"QS",
+			">>",
+			"echo",
+			"style",
+			"SCALE",
+			"a",
+			"w"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"LGE.Math.randRange",
+			"Date.now()",
+			"lakritz",
+			"LK"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "lge/game/screen/screen.js",
+					"settings":
+					{
+						"buffer_size": 1416,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								715,
+								393
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 376.0
+	},
+	"replace":
+	{
+		"height": 62.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true
+}

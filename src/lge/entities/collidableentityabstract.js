@@ -1,3 +1,4 @@
+//deprecated
 LGE.ENTITIES.CollidableEntityAbstract = LGE.ENTITIES.MoveableEntity.extend({
 	lastCollision:null
 	,repel:.1

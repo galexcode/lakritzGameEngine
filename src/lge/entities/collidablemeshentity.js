@@ -1,3 +1,4 @@
+//deprecated
 //Nasty extension hack, could be nicer, but works for now...
 LGE.ENTITIES.CollidableMeshEntity = extendTHREEClass(THREE.Mesh,$.extend(Object.create(LGE.ENTITIES.CollidableEntityAbstract.prototype),{
 	init:function(geometry,material,velocity,friction,gravity,repel){

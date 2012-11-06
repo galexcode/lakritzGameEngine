@@ -7,7 +7,7 @@ import tempfile
 
 def main(argv=None):
 	parser = argparse.ArgumentParser()
-	parser.add_argument('--packages', action='append', required=True)
+	parser.add_argument('--packages', action='append', default=['all'])
 	parser.add_argument('--wrap', action='append', default=['(function($,THREE,lakritz,LGE,undefined){\n', '\n})(window.jQuery,window.THREE,window.lakritz,window.LGE);'])
 	parser.add_argument('--externs', action='append', default=['externs/all.js'])
 	parser.add_argument('--minify', action='store_true', default=False)

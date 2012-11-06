@@ -1,3 +1,4 @@
+//deprecated
 LGE.ENTITIES.CollidableHitboxEntity = LGE.ENTITIES.CollidableEntityAbstract.extend({
 	hitbox:null
 	,hitboxVisible:false

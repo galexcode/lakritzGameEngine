@@ -116,7 +116,7 @@ LGE.Game = lakritz.Model.extend({
 			return this;
 		}
 
-		if((this.bool = bool) && !this.debugGraphObject){
+		if((this.debugGraph = bool) && !this.debugGraphObject){
 			this.debugGraphObject = new Stats();
 			$(this.debugGraphObject.domElement).css({
 				'position':'absolute',
@@ -124,7 +124,7 @@ LGE.Game = lakritz.Model.extend({
 				'left':10,
 				'z-index':10
 			}).appendTo(this.el);
-		}else{
+		}else if(this.debugGraphObject){
 			$(this.debugGraphObject.domElement).toggle(bool);
 		}
 	},
@@ -220,7 +220,8 @@ LGE.Game = lakritz.Model.extend({
 			return;
 		}
 		var t=this;
-		window.requestAnimFrame(function(){t.renderLoop();});
+		window.setTimeout(function(){t.renderLoop();},this.updateRate);
+		//window.requestAnimFrame(function(){t.renderLoop();});
 
 		var tsUpdate = Date.now();
 		if( tsUpdate - this.lastUpdate > this.updateRate){

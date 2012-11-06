@@ -1,3 +1,4 @@
+//deprecated
 LGE.ENTITIES.MoveableEntity = LGE.ENTITIES.Entity.extend({
 	velocity:null
 	,friction:null

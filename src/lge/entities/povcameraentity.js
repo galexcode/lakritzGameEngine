@@ -1,3 +1,4 @@
+//deprecated
 LGE.ENTITIES.POVCameraEntity = LGE.ENTITIES.MoveableEntity.extend({
 	camera:null
 	,cameraTrain:null

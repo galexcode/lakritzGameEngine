@@ -26,7 +26,8 @@ LGE.Screen = lakritz.Model.extend({
 			}
 		}*/
 	},
-	show:function(){
+	show:function(e){
+		this.visible = true;
 		this.setScene(new THREE.Scene());
 		this.setCamera(new THREE.PerspectiveCamera(
 			45,
@@ -36,8 +37,12 @@ LGE.Screen = lakritz.Model.extend({
 		));
 		this.getScene().add(this.getCamera());
 	},
-	hide:function(e){},
-	destroy:function(e){},
+	hide:function(e){
+		this.visible = false;
+	},
+	destroy:function(e){
+
+	},
 	getCamera:function(){
 		return this.camera;
 	},
