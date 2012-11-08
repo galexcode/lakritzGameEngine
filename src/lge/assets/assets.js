@@ -1,3 +1,8 @@
+/**
+ *class		 Assets
+ *package	 LGE
+ *file 		 assets.js
+ */
 LGE.Assets = lakritz.Singleton.extend({
 	add:function(name,file){
 		if(lakritz.isObject(name)){

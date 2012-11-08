@@ -1,9 +1,9 @@
 [
-	"lge/shims/fullscreenapi.js"
+	"lge/lge.js"
+	,"lge/shims/fullscreenapi.js"
 	,"lge/shims/pointerlockapi.js"
 	,"lge/shims/requestanimationframe.js"
 	,"lge/utils.js"
-	,"lge/lge.js"
 	,"lge/math.js"
 	,"lge/game/game.js"
 	,"lge/game/gamewidget.js"
@@ -18,4 +18,5 @@
 	,"lge/game/povcameracontroller.js"
 	,"lge/game/screen/sceneinspectorscreen.js"
 	,"lge/assets/assets.js"
+	,"lge/lgewrap.js"
 ]

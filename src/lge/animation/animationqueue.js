@@ -1,3 +1,8 @@
+/**
+ *class		 AnimationQueue
+ *package	 LGE
+ *file 		 animationqueue.js
+ */
 //TODO Reverse not usable yet! (initialValues need to be overwritten)
 LGE.AnimationQueue = lakritz.Model.extend({
 	animations:[]

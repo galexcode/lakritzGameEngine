@@ -1,3 +1,9 @@
+/**
+ *class		 Unknown Class
+ *package	 LGE.Math
+ *file 		 math.js
+ */
+
 LGE.Math = {};
 
 LGE.Math.randRange = window.randRange = (function(){

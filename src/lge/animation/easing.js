@@ -1,3 +1,8 @@
+/**
+ *class		 Animation
+ *package	 LGE
+ *file 		 easing.js
+ */
 LGE.Animation.equations = {
 	linear:function(x, t, b, c, d){
 	return ((t/=d) * c) + b;

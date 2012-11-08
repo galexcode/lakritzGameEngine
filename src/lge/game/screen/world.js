@@ -1,3 +1,9 @@
+/**
+ *class		 World
+ *package	 LGE
+ *file 		 world.js
+ */
+
 if(console && !Physijs){
 	console.warn("Physijs not found!");
 }
@@ -16,8 +22,18 @@ LGE.World = LGE.Screen.extend({
 		this.scene.addEventListener("update",function(e){
 			if(t.physics && (t.game && !t.game.paused))
 				t.scene.simulate(t.delta,t.physicsPrecision);
-			
 			t.debugGraphObject&&t.debugGraphObject.update();
+		});
+
+		this.game.bind("pause",function(e){
+			if(!e.paused){
+				t.scene.simulate(t.delta,t.physicsPrecision);
+			}
+		});
+
+		this.setDebugSimulationGraph(this.game.getDebugGraph());
+		this.game.bind("debug",function(e){
+			t.setDebugSimulationGraph(e.show);
 		});
 
 		this.setGravity(new THREE.Vector3(0,-1000,0));

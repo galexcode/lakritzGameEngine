@@ -1,9 +1,8 @@
 'use strict';
-	
-Physijs.scripts.worker = 'assets/js/physijs_worker.js';
-Physijs.scripts.ammo = 'ammo.js';
-
-var Example = LGE.GameWidget.extend({
+LGE.physiconf.worker = 'assets/js/physijs_worker.js';
+LGE.load('assets/js/jquery-1.8.1.min.js;assets/js/lakritz.js;assets/js/three.min.js;assets/js/physi.js;assets/js/stats.min.js'.split(';'),
+function(){
+window.Example = LGE.GameWidget.extend({
 	usePointerLock:false
 	,init:function(container){
 		LGE.GameWidget.prototype.init.call(this,container);
@@ -16,7 +15,6 @@ var PhysiTestScreen = LGE.World.extend({
 	physicsPrecision:1
 	,boxes:null
 	,show:function(e){
-		this.setDebugSimulationGraph(true);
 		this.camera = new THREE.PerspectiveCamera(50,this.game.getAspectRatio(),LGE.Screen.cameraDefaultNear,LGE.Screen.cameraDefaultFar);
 		this.camera.position = new THREE.Vector3(1000,500,500);
 		this.camera.lookAt(this.scene.position.clone().setY(300));
@@ -96,14 +94,6 @@ var boxParticle = LGE.ENTITIES.Entity.extend({
 			,1
 		);
 		var t=this;
-		/*this.addEventListener("update",function(){
-			//t.material.color.g = Math.abs(t.getAngularVelocity().dot(new THREE.Vector3(1,1,1))) / 10;
-			if(t.scale.x > 8)
-				return;
-			t.scale.x += .01;
-			t.scale.y += .01;
-			t.scale.z += .01;
-		});*/
 	}
 	,accelerate:function(){
 		var v = new THREE.Vector3(
@@ -114,4 +104,6 @@ var boxParticle = LGE.ENTITIES.Entity.extend({
 		this.scale.set(1,1,1);
 		this.setLinearVelocity(v.multiplyScalar(2));
 	}
+});
+
 });

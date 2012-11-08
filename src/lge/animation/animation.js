@@ -1,3 +1,8 @@
+/**
+ *class		 Animation
+ *package	 LGE
+ *file 		 animation.js
+ */
 LGE.Animation = lakritz.Model.extend({
 	_target:null,
 	_values:null,

@@ -1,3 +1,8 @@
+/**
+ *class		 Game
+ *package	 LGE
+ *file 		 game.js
+ */
 LGE.Game = lakritz.Model.extend({
 	width:720,
 	height:405,
@@ -45,7 +50,11 @@ LGE.Game = lakritz.Model.extend({
 		this.setupFullScreenListener();
 
 		//idle state
-		$(window).focus(function(){t.bypassRendering = false;}).blur(function(){t.bypassRendering = true;});
+		$(window).focus(function(){
+			t.bypassRendering = false;			
+		}).blur(function(){
+			t.bypassRendering = true;
+		});
 		
 		this.setDebugGraph(this.debugGraph);
 		this.renderLoop();
@@ -115,7 +124,7 @@ LGE.Game = lakritz.Model.extend({
 			this.debugGraph = false;
 			return this;
 		}
-
+		this.trigger({name:"debug",show:bool});
 		if((this.debugGraph = bool) && !this.debugGraphObject){
 			this.debugGraphObject = new Stats();
 			$(this.debugGraphObject.domElement).css({
@@ -148,6 +157,7 @@ LGE.Game = lakritz.Model.extend({
 		}else{
 			this.paused = paused;
 		}
+		this.trigger({name:"pause",paused:paused});
 		return this;
 	},
 	getPaused:function(){

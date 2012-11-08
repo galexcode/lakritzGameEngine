@@ -4,6 +4,22 @@
 		"selected_items":
 		[
 			[
+				"debug",
+				"debugGraphObject"
+			],
+			[
+				"debugG",
+				"debugGraph"
+			],
+			[
+				"ud",
+				"updateRate"
+			],
+			[
+				"phy",
+				"physicsPrecision"
+			],
+			[
 				"hit",
 				"hitdirections"
 			],
@@ -228,10 +244,6 @@
 				"updateRate"
 			],
 			[
-				"debug",
-				"debugGraphObject"
-			],
-			[
 				"debugGrap",
 				"debugGraphObject"
 			],
@@ -299,7 +311,83 @@
 			"file": "lge/game/screen/screen.js",
 			"settings":
 			{
-				"buffer_size": 1416,
+				"buffer_size": 1469,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "lge/game/screen/world.js",
+			"settings":
+			{
+				"buffer_size": 1615,
+				"line_ending": "Windows",
+				"name": "LGE.World = LGE.Screen.extend({"
+			}
+		},
+		{
+			"file": "all.json",
+			"settings":
+			{
+				"buffer_size": 547,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "LGE.ENTITIES = {};\n\nLGE.ENTITIES.Entity = extendTHREEClass(Physijs.Mesh,{\n	init:function(mesh, material, friction, rest, mass, physijsMeshClass){\n		friction = friction||0;\n		rest = rest||0;\n		mass = mass||0;\n		physijsMeshClass = physijsMeshClass||Physijs.BoxMesh;\n		physijsMeshClass.prototype.constructor.call(this,mesh,Physijs.createMaterial(material,friction,rest),mass);\n		\n		this.bind = this.addEventListener;\n		this.unbind = this.removeEventlistener;\n		this.trigger = this.dispatchEvent;\n	}\n});\n\n",
+			"file": "lge/entities/entity.js",
+			"file_size": 513,
+			"file_write_time": 129966812106085895,
+			"settings":
+			{
+				"buffer_size": 501,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "lge/lge.js",
+			"settings":
+			{
+				"buffer_size": 453,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/D/Work/Projekte/lakritz/lakritzGameEngine/examples/example6-restructuretest.js",
+			"settings":
+			{
+				"buffer_size": 3380,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/D/Work/Projekte/lakritz/lakritzGameEngine/build/lge.js",
+			"settings":
+			{
+				"buffer_size": 78084,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/D/Work/Projekte/lakritz/lakritzGameEngine/examples/example.html",
+			"settings":
+			{
+				"buffer_size": 759,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "lge/game/game.js",
+			"settings":
+			{
+				"buffer_size": 5691,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/D/Work/Projekte/lakritz/lakritzGameEngine/examples/assets/js/physi.js",
+			"settings":
+			{
+				"buffer_size": 43262,
 				"line_ending": "Windows"
 			}
 		}
@@ -310,6 +398,10 @@
 		"height": 58.0,
 		"selected_items":
 		[
+			[
+				"add folder",
+				"Project: Add Folder"
+			],
 			[
 				"folder",
 				"Project: Add Folder"
@@ -336,6 +428,18 @@
 	},
 	"file_history":
 	[
+		"/C/Users/Vicious/Downloads/Heron.s",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/build/lge.min.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/game/gamewidget.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/examples/assets/js/physi.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/game/game.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/entities/povcameraentity.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/examples/example5-physijs.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/utils/externs/all.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/entities/collidablemeshentity.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/entities/collidablehitboxentity.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/entities/collidableentityabstract.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/entities/moveableentity.js",
 		"/C/Users/Vicious/AppData/Roaming/Sublime Text 2/Packages/User/Lakritz Core.sublime-build",
 		"/D/Work/Projekte/lakritz/lakritzGameEngine/utils/build.py",
 		"/C/Users/Vicious/AppData/Roaming/Sublime Text 2/Packages/User/Default (Windows).sublime-keymap",
@@ -343,21 +447,15 @@
 		"/C/Users/Vicious/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
 		"/D/Work/Projekte/lakritz/lakritzGameEngine/build/lge.js",
 		"/D/Work/Projekte/lakritz/lakritzGameEngine/utils/build.bat",
-		"/D/Work/Projekte/lakritz/lakritzGameEngine/utils/externs/all.js",
 		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/all.json",
 		"/D/Work/Projekte/lakritz/three.js/utils/build.py",
-		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/entities/collidablehitboxentity.js",
 		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/game/povcameracontroller.js",
 		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/math.js",
 		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/utils.js",
 		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/game/screen/sceneinspectorscreen.js",
 		"/D/Work/Projekte/lakritz/lakritzGameEngine/examples/example.html",
-		"/D/Work/Projekte/lakritz/lakritzGameEngine/build/lge.min.js",
-		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/entities/povcameraentity.js",
-		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/game/game.js",
 		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/animation/animation.js",
 		"/D/Work/Projekte/lakritz/lakritzGameEngine/utils/externals/all.js",
-		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/entities/collidablemeshentity.js",
 		"/D/Work/Projekte/lakritz/three.js/utils/build.bat",
 		"/D/Work/Projekte/lakritz/three.js/utils/externs/extras.js",
 		"/D/Work/Projekte/lakritz/three.js/utils/externs/common.js",
@@ -366,26 +464,21 @@
 		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge.js",
 		"/D/Work/Projekte/lakritz/three.js/utils/build.js",
 		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/assets.js",
-		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/entities/collidableentityabstract.js",
 		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/entities/entities.js",
 		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/entities/collision.js",
-		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/entities/moveableentity.js",
 		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/animation/timeout.js",
 		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/animation/animationqueue.js",
 		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge.easing.js",
 		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/animation/easing.js",
 		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/input/inputprocessor.js",
 		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/game/screen.js",
-		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/game/gamewidget.js",
 		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/shims/pointerlockapi.js",
 		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/shims/requestanimationframe.js",
 		"/D/Work/Projekte/lakritz/three.js/utils/includes/common.json",
 		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/shims/fullscreenapi.js",
 		"/D/Steam/SteamApps/common/call of duty modern warfare 3/players2/config_mp.cfg",
 		"/D/Work/Projekte/lakritz/lakritzGameEngine/examples/example3-collision.js",
-		"/D/Work/Projekte/lakritz/lakritzGameEngine/examples/assets/js/physi.js",
 		"/D/Work/Projekte/lakritz/lakritzGameEngine/examples/example2-fps.js",
-		"/D/Work/Projekte/lakritz/lakritzGameEngine/examples/example5-physijs.js",
 		"/D/Work/Projekte/lakritz/lakritzGameEngine/examples/assets/models/tower/tower.dae",
 		"/C/Users/Vicious/Desktop/test2.html",
 		"/D/Work/Projekte/lakritz/requirejs/testBaseUrl.js",
@@ -393,7 +486,6 @@
 		"/D/Work/Projekte/lakritz/lakritzGameEngine/examples/assets/js/ammo.js",
 		"/D/Work/Projekte/lakritz/lakritzGameEngine/examples/example1.js",
 		"/D/Work/Projekte/lakritz/lakritzGameEngine/examples/assets/js/lakritz.js",
-		"/C/Users/Vicious/Downloads/Heron.s",
 		"/C/Users/Vicious/AppData/Local/Temp/fz3temp-1/distributors.phtml",
 		"/C/Users/Vicious/AppData/Local/Temp/fz3temp-1/ajax.php",
 		"/C/Users/Vicious/AppData/Local/Temp/fz3temp-1/contacts.js",
@@ -448,6 +540,17 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"size",
+			"__dirty",
+			"x",
+			"Mesh",
+			"debug",
+			"velocity",
+			"apply",
+			"set",
+			"apply",
+			"Position",
+			"scene = ",
 			"rad",
 			"rad2deg",
 			"deg2rad",
@@ -570,7 +673,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 5,
 			"sheets":
 			[
 				{
@@ -578,15 +681,15 @@
 					"file": "lge/game/screen/screen.js",
 					"settings":
 					{
-						"buffer_size": 1416,
+						"buffer_size": 1469,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								715,
-								393
+								1015,
+								1015
 							]
 						],
 						"settings":
@@ -596,6 +699,248 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "lge/game/screen/world.js",
+					"settings":
+					{
+						"buffer_size": 1615,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								603,
+								603
+							]
+						],
+						"settings":
+						{
+							"auto_name": "LGE.World = LGE.Screen.extend({",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "all.json",
+					"settings":
+					{
+						"buffer_size": 547,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								440,
+								440
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "lge/entities/entity.js",
+					"settings":
+					{
+						"buffer_size": 501,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								263,
+								263
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "lge/lge.js",
+					"settings":
+					{
+						"buffer_size": 453,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								382,
+								382
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "/D/Work/Projekte/lakritz/lakritzGameEngine/examples/example6-restructuretest.js",
+					"settings":
+					{
+						"buffer_size": 3380,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								786,
+								792
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 975.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "/D/Work/Projekte/lakritz/lakritzGameEngine/build/lge.js",
+					"settings":
+					{
+						"buffer_size": 78084,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "/D/Work/Projekte/lakritz/lakritzGameEngine/examples/example.html",
+					"settings":
+					{
+						"buffer_size": 759,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								405,
+								405
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "lge/game/game.js",
+					"settings":
+					{
+						"buffer_size": 5691,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5621,
+								5621
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2379.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "/D/Work/Projekte/lakritz/lakritzGameEngine/examples/assets/js/physi.js",
+					"settings":
+					{
+						"buffer_size": 43262,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								33142,
+								33142
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 13842.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -609,7 +954,7 @@
 	},
 	"input":
 	{
-		"height": 0.0
+		"height": 29.0
 	},
 	"layout":
 	{
@@ -663,6 +1008,6 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 150.0,
+	"side_bar_width": 296.0,
 	"status_bar_visible": true
 }

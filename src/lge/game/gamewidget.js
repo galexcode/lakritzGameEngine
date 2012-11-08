@@ -1,3 +1,8 @@
+/**
+ *class		 GameWidget
+ *package	 LGE
+ *file 		 gamewidget.js
+ */
 LGE.GameWidget = LGE.Game.extend({
 	clearColor:null,
 	useWidgetControls:true,
@@ -5,6 +10,12 @@ LGE.GameWidget = LGE.Game.extend({
 	init:function(container){
 		LGE.Game.prototype.init.call(this,container);
 		var t=this;
+
+		if(!$.isFunction(document.onselectstart)){
+			document.onselectstart = function() {
+			  return false;
+			};
+		}
 
 		if(this.clearColor!==null)
 			this.renderer.setClearColorHex( this.clearColor, 1 );

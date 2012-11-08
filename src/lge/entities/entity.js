@@ -1,3 +1,9 @@
+/**
+ *class		 Entity
+ *package	 LGE.ENTITIES
+ *file 		 entity.js
+ */
+
 LGE.ENTITIES = {};
 
 LGE.ENTITIES.Entity = extendTHREEClass(Physijs.Mesh,{

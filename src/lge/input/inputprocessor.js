@@ -1,3 +1,8 @@
+/**
+ *class		 InputProcessor
+ *package	 LGE
+ *file 		 inputprocessor.js
+ */
 LGE.InputProcessor = lakritz.Model.extend({
 	game:null,
 	keyboardFocus:false,

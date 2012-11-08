@@ -1,3 +1,8 @@
+/**
+ *class		 Unknown Class
+ *package	 Shims
+ *file 		 requestanimationframe.js
+ */
 window.requestAnimFrame = (function(){
   return  window.requestAnimationFrame       || 
           window.webkitRequestAnimationFrame || 

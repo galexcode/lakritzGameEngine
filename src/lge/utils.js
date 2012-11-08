@@ -1,3 +1,8 @@
+/**
+ *class         Unknown Class
+ *package     LGE
+ *file          utils.js
+ */
 var extendTHREEClass = function(parent,protoProps,staticProps){
 	var child;
 
@@ -34,3 +39,15 @@ var extendTHREEClass = function(parent,protoProps,staticProps){
     };
     return child;
 }
+
+//htmlLauncher
+$(function(){
+    $(document.body).find('[data-lge-object!=""]').each(function(){
+        var el = $(this), args = el.data(), gameClass = args.lgeObject,obj;
+        if(!window[gameClass]||el.data("game")){
+            return;
+        }
+        obj = new window[gameClass](el,args);
+        el.data("game",obj);
+    });
+})

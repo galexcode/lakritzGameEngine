@@ -1,3 +1,9 @@
+/**
+ *class         Unknown Class
+ *package     Shims
+ *file          fullscreenapi.js
+ */
+
 //FullscreenApi
 var
     fullScreenApi = {

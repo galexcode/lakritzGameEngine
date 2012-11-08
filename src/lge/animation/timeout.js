@@ -1,3 +1,8 @@
+/**
+ *class		 Timeout
+ *package	 LGE
+ *file 		 timeout.js
+ */
 LGE.Timeout = lakritz.Model.extend({
 	time:0,
 	starttime:0,

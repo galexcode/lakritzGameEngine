@@ -1,3 +1,8 @@
+/**
+ *class		 Screen
+ *package	 LGE
+ *file 		 screen.js
+ */
 LGE.Screen = lakritz.Model.extend({
 	scene:null,
 	camera:null,

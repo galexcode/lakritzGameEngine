@@ -1,3 +1,8 @@
+/**
+ *class		 Unknown Class
+ *package	 Shims
+ *file 		 pointerlockapi.js
+ */
 // PointerLockApi
 // todo, siehe: http://www.html5rocks.com/en/tutorials/pointerlock/intro/
 var pointerLockApi = (lakritz.Singleton.extend({
