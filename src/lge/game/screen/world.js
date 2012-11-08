@@ -60,6 +60,20 @@ LGE.World = LGE.Screen.extend({
 		this.scene.setGravity(g);
 		return this;
 	}
+	,add:function(child){
+		this.scene.add(child);
+		child.trigger("add");
+	}
+	,remove:function(child){
+		var ret = this.scene.remove(child);
+		if(ret){
+			child.trigger("remove");
+		}
+		return ret;
+	}
+	,getChildByName:function(name){
+		return this.scene.getChildByName(name);
+	}
 	,setDebugSimulationGraph:function(bool){
 		if(!Stats){
 			this.debugGraph = false;

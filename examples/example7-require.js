@@ -45,6 +45,26 @@ var PhysiTestScreen = LGE.World.extend({
 		ground.position.y = -5;
 		ground.receiveShadow=true;
 		this.scene.add(ground);
+		
+		var tt = new testTrigger();
+		tt.position.y = 250;
+//		tt.position.x = 250;
+//		tt.position.z = -250;
+		tt.debug = true;
+		this.scene.add(tt);
+
+		/*var mousesphere = new THREE.Mesh(new THREE.SphereGeometry(25),new THREE.MeshBasicMaterial({color:0xffff00,wireframe:true}));
+		this.scene.add(mousesphere);*/
+
+		var mouse3d = new LGE.Mouse3D(this.game,this.getCamera()), mouseover=false;
+		mouse3d.add(tt);
+
+		tt.bind("mouseover",function(){
+			this.material.color.setHex(0xff0000);
+		});
+		tt.bind("mouseout",function(){
+			this.material.color.setHex(0x0000ff);
+		});
 
 		var i=100,box,scene = this.scene, boxA=this.boxes=new Array(), mat;
 		
@@ -63,6 +83,10 @@ var PhysiTestScreen = LGE.World.extend({
 			boxA.push(box);
 			scene.add(box);
 		})();
+		box.name = "specialbox";
+		tt.addCollisionListener("specialbox",function(o){
+			console.log(o.name+" hit trigger");
+		});
 
 		this.setGravity(new THREE.Vector3(0,-300,0));
 		LGE.World.prototype.show.call(this,e);
@@ -105,5 +129,13 @@ var boxParticle = LGE.ENTITIES.Entity.extend({
 		this.setLinearVelocity(v.multiplyScalar(2));
 	}
 });
+
+var testTrigger = LGE.ENTITIES.Trigger.extend({
+	init:function(){
+		testTrigger.__super__.init.call(this,new THREE.CubeGeometry(200,200,200));
+	}
+});
+
+
 
 });

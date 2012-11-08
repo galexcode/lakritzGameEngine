@@ -5,7 +5,7 @@
  */
 if(!window.LGE){
 	LGE = window.LGE = {
-		VERSION:"0.0.05 pre-alpha"
+		VERSION:"0.0.06 pre-alpha"
 		,physiconf:{
 			worker:'physijs_worker.js'
 			,ammo:'ammo.js'
