@@ -4,7 +4,7 @@
  *file 		 lgewrap.js
  */
 })//close anonymous wrapper
-(window.jQuery,window.THREE,window.lakritz,window.LGE,window.Physijs)
+(window.jQuery,window.THREE,window.LGE,window.Physijs)
 };//close define function
 
 //include mainfile

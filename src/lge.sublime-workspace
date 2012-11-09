@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"childre",
+				"childrenCheckMouseState"
+			],
+			[
 				"box",
 				"boxParticle"
 			],
@@ -324,43 +328,18 @@
 	"buffers":
 	[
 		{
-			"file": "/D/Work/Projekte/lakritz/lakritzGameEngine/examples/example7-require.js",
+			"file": "/D/Work/Projekte/lakritz/lakritzGameEngine/examples/example8-menu.js",
 			"settings":
 			{
-				"buffer_size": 3575,
+				"buffer_size": 2903,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "lge/lge.js",
+			"file": "lge/entities/entity.js",
 			"settings":
 			{
-				"buffer_size": 1548,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "lge/game/screen/world.js",
-			"settings":
-			{
-				"buffer_size": 2207,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "lge/entities/trigger.js",
-			"settings":
-			{
-				"buffer_size": 1905,
-				"line_ending": "Windows",
-				"name": "LGE.ENTITIES.Trigger = LGE.ENTITIES.Entity.extend("
-			}
-		},
-		{
-			"file": "/D/Work/Projekte/lakritz/lakritzGameEngine/examples/assets/js/physijs_worker.js",
-			"settings":
-			{
-				"buffer_size": 34413,
+				"buffer_size": 871,
 				"line_ending": "Windows"
 			}
 		},
@@ -373,10 +352,10 @@
 			}
 		},
 		{
-			"file": "/D/Work/Projekte/lakritz/three.js/src/scenes/Scene.js",
+			"file": "lge/input/inputprocessor.js",
 			"settings":
 			{
-				"buffer_size": 1823,
+				"buffer_size": 3956,
 				"line_ending": "Windows"
 			}
 		},
@@ -384,15 +363,31 @@
 			"file": "all.json",
 			"settings":
 			{
-				"buffer_size": 594,
+				"buffer_size": 619,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "lge/entities/entity.js",
+			"file": "lge/input/mouse3d.js",
 			"settings":
 			{
-				"buffer_size": 871,
+				"buffer_size": 2918,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "lge/animation/animation.js",
+			"settings":
+			{
+				"buffer_size": 3423,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "lge/utils.js",
+			"settings":
+			{
+				"buffer_size": 1837,
 				"line_ending": "Windows"
 			}
 		}
@@ -433,21 +428,28 @@
 	},
 	"file_history":
 	[
-		"/D/Work/Projekte/lakritz/lakritzGameEngine/examples/assets/js/ammo.js",
 		"/D/Work/Projekte/lakritz/lakritzGameEngine/examples/example.html",
-		"/D/Work/Projekte/lakritz/lakritzGameEngine/utils/build.py",
 		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/game/screen/world.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/game/screen/screen.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/input/mouse3d.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/entities/trigger.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/lge.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/examples/assets/js/physijs_worker.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/examples/assets/js/physi.js",
+		"/D/Work/Projekte/lakritz/three.js/src/scenes/Scene.js",
+		"/D/Work/Projekte/lakritz/three.js/src/core/Object3D.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/all.json",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/entities/entity.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/examples/assets/js/ammo.js",
+		"/D/Work/Projekte/lakritz/lakritzGameEngine/utils/build.py",
 		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/game/game.js",
 		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/game/gamewidget.js",
-		"/D/Work/Projekte/lakritz/lakritzGameEngine/examples/assets/js/physijs_worker.js",
 		"/D/Work/Projekte/lakritz/lakritzGameEngine/build/lge.js",
 		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/lgewrap.js",
 		"/D/Work/Projekte/lakritz/three.js/utils/build.py",
 		"/D/Work/Projekte/lakritz/lakritzGameEngine/build/lge.min.js",
 		"/D/Work/Projekte/lakritz/lakritzGameEngine/utils/build.bat",
 		"/D/Work/Projekte/lakritz/three.js/utils/build.bat",
-		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/all.json",
-		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/lge.js",
 		"/D/Work/Projekte/lakritz/lakritzGameEngine/examples/assets/js/lakritz.js",
 		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/utils.js",
 		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/math.js",
@@ -455,15 +457,12 @@
 		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/shims/pointerlockapi.js",
 		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/shims/fullscreenapi.js",
 		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/input/inputprocessor.js",
-		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/game/screen/screen.js",
-		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/entities/entity.js",
 		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/assets/assets.js",
 		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/animation/timeout.js",
 		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/animation/easing.js",
 		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/animation/animationqueue.js",
 		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/animation/animation.js",
 		"/C/Users/Vicious/AppData/Roaming/Sublime Text 2/Packages/User/lgefile.sublime-snippet",
-		"/D/Work/Projekte/lakritz/lakritzGameEngine/examples/assets/js/physi.js",
 		"/C/Users/Vicious/Downloads/Heron.s",
 		"/D/Work/Projekte/lakritz/lakritzGameEngine/src/lge/entities/povcameraentity.js",
 		"/D/Work/Projekte/lakritz/lakritzGameEngine/examples/example5-physijs.js",
@@ -551,6 +550,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"_dirty",
 			".name",
 			"dispatch",
 			" \n",
@@ -677,8 +677,7 @@
 			"		\n",
 			"camera",
 			"Camera",
-			"camera",
-			"Camera"
+			"camera"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -700,23 +699,23 @@
 	"groups":
 	[
 		{
-			"selected": 6,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "/D/Work/Projekte/lakritz/lakritzGameEngine/examples/example7-require.js",
+					"file": "/D/Work/Projekte/lakritz/lakritzGameEngine/examples/example8-menu.js",
 					"settings":
 					{
-						"buffer_size": 3575,
+						"buffer_size": 2903,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1618,
-								1618
+								887,
+								887
 							]
 						],
 						"settings":
@@ -725,25 +724,25 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 819.0,
+						"translation.y": 78.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "lge/lge.js",
+					"file": "lge/entities/entity.js",
 					"settings":
 					{
-						"buffer_size": 1548,
+						"buffer_size": 871,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1447,
-								1447
+								871,
+								871
 							]
 						],
 						"settings":
@@ -759,87 +758,6 @@
 				},
 				{
 					"buffer": 2,
-					"file": "lge/game/screen/world.js",
-					"settings":
-					{
-						"buffer_size": 2207,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1612,
-								1612
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 312.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "lge/entities/trigger.js",
-					"settings":
-					{
-						"buffer_size": 1905,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1838,
-								1838
-							]
-						],
-						"settings":
-						{
-							"auto_name": "LGE.ENTITIES.Trigger = LGE.ENTITIES.Entity.extend(",
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "/D/Work/Projekte/lakritz/lakritzGameEngine/examples/assets/js/physijs_worker.js",
-					"settings":
-					{
-						"buffer_size": 34413,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								8202,
-								8202
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 3052.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
 					"file": "/D/Work/Projekte/lakritz/lakritzGameEngine/examples/assets/js/physi.js",
 					"settings":
 					{
@@ -850,8 +768,8 @@
 						"selection":
 						[
 							[
-								788,
-								788
+								27381,
+								27381
 							]
 						],
 						"settings":
@@ -860,17 +778,17 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 11515.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 6,
-					"file": "/D/Work/Projekte/lakritz/three.js/src/scenes/Scene.js",
+					"buffer": 3,
+					"file": "lge/input/inputprocessor.js",
 					"settings":
 					{
-						"buffer_size": 1823,
+						"buffer_size": 3956,
 						"regions":
 						{
 						},
@@ -887,25 +805,25 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1209.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 4,
 					"file": "all.json",
 					"settings":
 					{
-						"buffer_size": 594,
+						"buffer_size": 619,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								134,
-								134
+								314,
+								314
 							]
 						],
 						"settings":
@@ -920,25 +838,80 @@
 					"type": "text"
 				},
 				{
-					"buffer": 8,
-					"file": "lge/entities/entity.js",
+					"buffer": 5,
+					"file": "lge/input/mouse3d.js",
 					"settings":
 					{
-						"buffer_size": 871,
+						"buffer_size": 2918,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								729,
-								729
+								1589,
+								1589
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 468.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "lge/animation/animation.js",
+					"settings":
+					{
+						"buffer_size": 3423,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2565,
+								2565
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 663.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "lge/utils.js",
+					"settings":
+					{
+						"buffer_size": 1837,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1814,
+								1814
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,

@@ -3,7 +3,7 @@
  *package     LGE
  *file          utils.js
  */
-var extendTHREEClass = function(parent,protoProps,staticProps){
+/*var extendTHREEClass = window.extendTHREEClass = function(parent,protoProps,staticProps){
 	var child;
 
     // The constructor function for the new subclass is either defined by you
@@ -38,7 +38,7 @@ var extendTHREEClass = function(parent,protoProps,staticProps){
     	return extendTHREEClass(this,protoProps,staticProps);
     };
     return child;
-}
+}*/
 
 //htmlLauncher
 $(function(){

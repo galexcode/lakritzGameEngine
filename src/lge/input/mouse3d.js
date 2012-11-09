@@ -9,6 +9,7 @@ LGE.Mouse3D = lakritz.Model.extend({
 	,position:null
 	,projector:null
 	,targets:null
+	,disabled:false
 	,init:function(game,camera){
 		this.game = game;
 		this.camera = camera;
@@ -17,12 +18,18 @@ LGE.Mouse3D = lakritz.Model.extend({
 		this.targets = [];
 		var t=this;
 		this.game.getInputProcessor().bind("mousedown",function(){
+			if(t.disabled)
+				return;
 			t.trigger({"name":"mousedown",position:t.position});
 			t.childrenCheckMouseState("mousedown");
 		}).bind("mouseup",function(e){
+			if(t.disabled)
+				return;
 			t.trigger({"name":"mouseup",position:t.position});
 			t.childrenCheckMouseState("mouseup");
 		}).bind("mousemove",function(e){
+			if(t.disabled)
+				return;
 			t.updatePosition(e.x,e.y);
 			t.trigger({"name":"mousemove",position:t.position});
 			t.childrenCheckMouseOver();
@@ -52,9 +59,9 @@ LGE.Mouse3D = lakritz.Model.extend({
 		vector.subSelf( this.camera.position ).normalize();
 		this.position = vector;
 	}
-	,getPositionOnObject:function(target,axis){
-		axis = axis||"y";
-		var coefficient = ((target.position[axis] - this.camera.position[axis]) / this.position[axis]);
+	,getPositionOnPoint:function(target,axis){
+		axis = (axis=="y"?"z":(axis=="z"?"y":(axis!="x"?"z":axis)));
+		var coefficient = ((target[axis] - this.camera.position[axis]) / this.position[axis]);
 		return this.camera.position.clone().addSelf(this.position.clone().multiplyScalar(coefficient));
 	}
 	,getPositionAtDistance:function(dist){

@@ -6,17 +6,21 @@
 
 LGE.ENTITIES = {};
 
-LGE.ENTITIES.Entity = extendTHREEClass(Physijs.Mesh,{
-	init:function(geometry, material, friction, rest, mass, physijsMeshClass){
+LGE.ENTITIES.Entity = lakritz.makeClass(Physijs.Mesh,{
+	constructor:function(){
+		lakritz.Model.apply(this,arguments);
+	}
+	,init:function(geometry, material, friction, rest, mass, physijsMeshClass){
 		friction = friction||0;
 		rest = rest||0;
 		mass = mass||0;
 		physijsMeshClass = physijsMeshClass||Physijs.BoxMesh;
 		physijsMeshClass.prototype.constructor.call(this,geometry,Physijs.createMaterial(material,friction,rest),mass);
 		
-		this.bind = this.addEventListener;
-		this.unbind = this.removeEventlistener;
-		this.trigger = this.dispatchEvent;
+		//overwrite that physijs crap ;)
+		this.addEventListener = this.bind;
+		this.removeEventListener = this.unbind;
+		this.dispatchEvent = this.trigger;
 	}
 },{
 	//http://bulletphysics.com/Bullet/BulletFull/classbtCollisionObject.html

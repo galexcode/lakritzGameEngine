@@ -56,5 +56,5 @@ LGE.load = function(files,callback){
 	}
 }
 
-LGE.define = function(){(function($,THREE,lakritz,LGE,Physijs){
+LGE.define = function(){(function($,THREE,LGE,Physijs){
 	// definition of all LGE classes

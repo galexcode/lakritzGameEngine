@@ -13,6 +13,7 @@ LGE.Screen = lakritz.Model.extend({
 		game.bind("resize",function(e){t.resize(e);});
 		this.bind("show",this.show);
 		this.bind("hide",this.hide);
+		this.setupScene();
 	},
 	resize:function(e){
 		if(this.camera){
@@ -21,18 +22,16 @@ LGE.Screen = lakritz.Model.extend({
 		}
 	},
 	update:function(delta){
-		//not sure if i should do this, events are slooooow!
-		/*if(this.scene && this.scene.children.length){
-			var child = this.scene.children.length, evt = {name:"update", detla:delta, target:this};
+		if(this.scene && this.scene.children.length){
+			var child = this.scene.children.length;
 			while(child--){
 				if(this.scene.children[child].trigger){
-					this.scene.children[child].trigger(evt);
+					this.scene.children[child].trigger("update");
 				}
 			}
-		}*/
+		}
 	},
-	show:function(e){
-		this.visible = true;
+	setupScene:function(){
 		this.setScene(new THREE.Scene());
 		this.setCamera(new THREE.PerspectiveCamera(
 			45,
@@ -41,6 +40,9 @@ LGE.Screen = lakritz.Model.extend({
 			LGE.Screen.cameraDefaultFar
 		));
 		this.getScene().add(this.getCamera());
+	},
+	show:function(e){
+		this.visible = true;
 	},
 	hide:function(e){
 		this.visible = false;

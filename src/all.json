@@ -1,5 +1,6 @@
 [
 	"lge/lge.js"
+	,"lge/lakritz.js"
 	,"lge/shims/fullscreenapi.js"
 	,"lge/shims/pointerlockapi.js"
 	,"lge/shims/requestanimationframe.js"
