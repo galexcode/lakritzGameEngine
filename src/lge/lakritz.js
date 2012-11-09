@@ -136,14 +136,15 @@
 			var eventName=null,parameters=null;
 			if(LK.isString(arguments[0])){
 				eventName=arguments[0];
-				parameters=Array.prototype.splice.call(arguments,0,1);
+				Array.prototype.splice.call(arguments,0,1);
+				parameters=arguments;
 			}else if($.isPlainObject(arguments[0]) && arguments[0].name){
 				eventName=arguments[0].name;
 				parameters=arguments;
 			}else{
 				return this;
 			}
-			
+
 			if(!stack[eventName] || !stack[eventName].length){
 				return this;
 			}

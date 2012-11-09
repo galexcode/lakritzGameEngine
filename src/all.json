@@ -16,6 +16,7 @@
 	,"lge/animation/easing.js"
 	,"lge/animation/timeout.js"
 	,"lge/animation/animationqueue.js"
+	,"lge/animation/animationmanager.js"
 	,"lge/entities/entity.js"
 	,"lge/entities/trigger.js"
 	,"lge/game/povcameracontroller.js"

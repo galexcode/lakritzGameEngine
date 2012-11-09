@@ -5,15 +5,26 @@
  */
 //TODO Reverse not usable yet! (initialValues need to be overwritten)
 LGE.AnimationQueue = lakritz.Model.extend({
-	animations:[]
+	animations:null
 	,current:0
 	,isrunning:false
 	,lastdelta:0
 	,isreverse:false
+	,init:function(){this.animations = [];}
 	,queue:function(animation){
 		if(lakritz.isObject(animation)){
 			var t=this;
 			animation.bind("complete",function(){t.onAnimationComplete();});
+			this.animations.push(animation);
+		}else if(lakritz.isArray(animation) && animation.length){
+			var t=this,animationIndex=animation.length,longestDuration=0,completeTarget=0;
+			while(animationIndex--){
+				if(longestDuration<animation[animationIndex]._options.duration + animation[animationIndex]._options.delay){
+					longestDuration = animation[animationIndex]._options.duration + animation[animationIndex]._options.delay;
+					completeTarget = animationIndex;
+				}
+			}
+			animation[completeTarget].bind("complete",function(){t.onAnimationComplete();});
 			this.animations.push(animation);
 		}
 			
@@ -37,8 +48,11 @@ LGE.AnimationQueue = lakritz.Model.extend({
 		if((this.isreverse&&this.current<=0)||(!this.isreverse&&this.current>=this.animations.length)){
 			this.stop();
 		}else{
+			var t=this;
 			this.trigger("next");
-			this.animations[this.current].start(this.isreverse);
+			this.each(this.current,function(){
+				this.start(t.isreverse);
+			});
 		}
 	}
 	,start:function(reverse){
@@ -50,7 +64,10 @@ LGE.AnimationQueue = lakritz.Model.extend({
 		this.lastdelta = Date.now();
 		this.isreverse = reverse?true:false;
 		this.current = this.isreverse?this.animations.length-1:0;
-		this.animations[this.current].start(this.isreverse);
+		var t=this;
+		this.each(this.current,function(){
+			this.start(t.isreverse);
+		});
 		this.trigger("start");
 		return this;
 	}
@@ -69,8 +86,10 @@ LGE.AnimationQueue = lakritz.Model.extend({
 		if(!this.animations.length)
 			return this;
 		for(var i=this.animations.length-1;i>=0;i--){
-			if(this.animations[i].reset)
-				this.animations[i].reset();
+			this.each(i,function(){
+				if(this.reset)
+					this.reset();
+			});
 		}
 		return this;
 	}
@@ -78,14 +97,37 @@ LGE.AnimationQueue = lakritz.Model.extend({
 		if(!this.animations.length)
 			return this;
 		for(var i=this.animations.length-1;i>=0;i--){
-			if(this.animations[i].end)
-				this.animations[i].end();
+			this.each(i,function(){
+				if(this.end)
+					this.end();
+			});
+		}
+		return this;
+	}
+	,updateStartValues:function(){
+		for(var i=this.animations.length-1;i>=0;i--){
+			this.each(i,function(){
+				if(this.updateStartValues)
+					this.updateStartValues();
+			});
 		}
 		return this;
 	}
 	,update:function(delta){
 		if(this.animations[this.current] && this.isrunning){
-			this.animations[this.current].update(delta);
+			this.each(this.current,function(){
+				this.update(delta);
+			});
+		}
+	},
+	each:function(index,func){
+		if(lakritz.isArray(this.animations[index])){
+				var subAnim=this.animations[index].length;
+				while(subAnim--){
+					func.call(this.animations[index][subAnim]);
+				}
+		}else{
+			func.call(this.animations[index]);
 		}
 	}
 });

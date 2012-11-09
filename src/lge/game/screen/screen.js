@@ -26,7 +26,7 @@ LGE.Screen = lakritz.Model.extend({
 			var child = this.scene.children.length;
 			while(child--){
 				if(this.scene.children[child].trigger){
-					this.scene.children[child].trigger("update");
+					this.scene.children[child].trigger("update",delta);
 				}
 			}
 		}

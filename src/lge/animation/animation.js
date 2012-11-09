@@ -138,6 +138,17 @@ LGE.Animation = lakritz.Model.extend({
 		}
 		return this;
 	},
+	updateStartValues:function(){
+		var prop;
+		for(prop in this._initialValues){
+			if(this._isreverse){
+				this._values[prop] = this._target[prop];
+			}else{
+				this._initialValues[prop] = this._target[prop];
+			}
+		}
+		return this;
+	},
 	end:function(){
 		var prop;
 		for(prop in this._values){
