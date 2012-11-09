@@ -46,11 +46,13 @@ LGE.AnimationQueue = lakritz.Model.extend({
 		}
 
 		if((this.isreverse&&this.current<=0)||(!this.isreverse&&this.current>=this.animations.length)){
-			this.stop();
+			this.stop(true);
 		}else{
 			var t=this;
 			this.trigger("next");
 			this.each(this.current,function(){
+				if(this.updateStartValues)
+					this.updateStartValues()
 				this.start(t.isreverse);
 			});
 		}

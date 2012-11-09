@@ -22,5 +22,6 @@
 	,"lge/game/povcameracontroller.js"
 	,"lge/game/screen/sceneinspectorscreen.js"
 	,"lge/assets/assets.js"
+	,"lge/ui/button.js"
 	,"lge/lgewrap.js"
 ]

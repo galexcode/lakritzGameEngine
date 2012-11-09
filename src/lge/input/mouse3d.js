@@ -69,6 +69,27 @@ LGE.Mouse3D = lakritz.Model.extend({
 	}
 	,mouseOverObject:function(object){
 		var pos = this.getPositionAtDistance(this.camera.position.distanceTo(object.position));
+		if(object.geometry){
+			if(!object.geometry.boundingBox)
+				object.geometry.computeBoundingBox();
+			if(
+				pos.x <= object.position.x + object.geometry.boundingBox.max.x
+				&& pos.x >= object.position.x + object.geometry.boundingBox.min.x
+
+				&& pos.y <= object.position.y + object.geometry.boundingBox.max.y
+				&& pos.y >= object.position.y + object.geometry.boundingBox.min.y
+				
+				&& pos.z <= object.position.z + object.geometry.boundingBox.max.z
+				&& pos.z >= object.position.z + object.geometry.boundingBox.min.z
+				
+				){
+				return true;
+			}
+
+			return false;
+		}
+
+
 		if(pos.distanceTo(object.position)<=object.boundRadius * object.boundRadiusScale){
 			return true;
 		}
