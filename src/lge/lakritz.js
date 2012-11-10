@@ -187,9 +187,9 @@
 			}
 		}
 
-		this.toString = function(){
+		/*this.toString = function(){
 			return '[object '+this.toJSON()+']';
-		};
+		};*/
 
 		if($.isFunction(this.init)){
 			this.init.apply(this,arguments);	

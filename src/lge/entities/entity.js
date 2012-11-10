@@ -4,8 +4,6 @@
  *file 		 entity.js
  */
 
-LGE.ENTITIES = {};
-
 LGE.ENTITIES.Entity = lakritz.makeClass(Physijs.Mesh,{
 	constructor:function(){
 		lakritz.Model.apply(this,arguments);

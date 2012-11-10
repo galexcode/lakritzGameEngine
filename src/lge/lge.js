@@ -5,7 +5,7 @@
  */
 if(!window.LGE){
 	LGE = window.LGE = {
-		VERSION:"0.0.08 pre-alpha"
+		VERSION:"0.0.09 pre-alpha"
 		,physiconf:{
 			worker:'physijs_worker.js'
 			,ammo:'ammo.js'
@@ -43,9 +43,9 @@ LGE.load = function(files,callback){
 		}
 		LGE.__loadCallback = callback||(function(){});
 		files.reverse();
-		(function(){
+		(function loadNext(){
 			if(i--){
-				LGE.import(files[i], arguments.callee);
+				LGE.import(files[i], loadNext);
 			}else{
 				if(callback){
 					//TODO my god, such an ugly hack!..

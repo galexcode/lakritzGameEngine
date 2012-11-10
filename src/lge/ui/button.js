@@ -4,24 +4,26 @@
  *file 		 button.js
  */
 
-LGE.UI = {};
-
 LGE.UI.Button = lakritz.makeClass(THREE.Mesh,{
 	animations:null
 	,label:null
 	,state:0
 	,geometry:null
 	,material:null
-	,constructor:function(){
-		lakritz.Model.apply(this,arguments);
-	}
-	,init:function(label,geometry,material){
-		this.geometry = geometry || new THREE.CubeGeometry(100,50,10);
-		this.material = material || new THREE.MeshBasicMaterial();
-		THREE.Mesh.call(this,this.geometry, this.material);
+	,constructor:function(label){
+		var callInit=$.isFunction(this.init);	
+		if(callInit){
+			var initFunc = this.init;
+			this.init = undefined;
+			lakritz.Model.apply(this,arguments);
+			this.init = initFunc;
+		}else{
+			lakritz.Model.apply(this,arguments);
+		}
 
-		this.label = label||"";
 		this.animations = new LGE.AnimationManager;
+		this.label = arguments[0] || "";
+		this.state = 0;
 
 		this
 		.bind("mouseover",function(){
@@ -72,42 +74,48 @@ LGE.UI.Button = lakritz.makeClass(THREE.Mesh,{
 		})
 		.bind("update",function(delta){this.animations.update(delta)});
 
-	}
-	,setState:function(state){
-		if(this.state != state){
-			this.state = state;
+		this.setState = function(state){
+			if(this.state != state){
+				this.state = state;
 
-			var anim = this.animations.children.length;
-			while(anim--){
-				var stateMap = parseInt(this.animations.children[anim].name.substr(6));
-				if((stateMap&state)==0){
-					this.animations.children[anim].stop(true);
-				}else if(!this.animations.children[anim]._running && !this.animations.children[anim].isrunning){
-					this.animations.children[anim].updateStartValues().start();
+				var anim = this.animations.children.length;
+				while(anim--){
+					var stateMap = parseInt(this.animations.children[anim].name.substr(6));
+					if((stateMap&state)==0){
+						this.animations.children[anim].stop(true);
+					}else if(!this.animations.children[anim]._running && !this.animations.children[anim].isrunning){
+						this.animations.children[anim].updateStartValues().start();
+					}
 				}
-			}
 
-			this.trigger("statechange",state);
+				this.trigger("statechange",state);
+			}
+			return this;
+		};
+
+		this.getState = function(){
+			return this.state;
+		};
+
+		this.setStateAnimation = function(state, animation){
+			var previousAnimation = this.animations.getChildByName("state_"+state);
+			if(previousAnimation){
+				this.animations.remove(previousAnimation);
+				previousAnimation.name = undefined;
+			}
+			if(animation){
+				animation.name = "state_"+state;
+				this.animations.add(animation);
+			}
+			return this;
 		}
-		return this;
-	}
-	,getState:function(){
-		return this.state;
-	}
-	,setStateAnimation:function(state, animation){
-		var previousAnimation = this.animations.getChildByName("state_"+state);
-		if(previousAnimation){
-			this.animations.remove(previousAnimation);
-			previousAnimation.name = undefined;
+
+		this.getStateAnimation = function(state){
+			return this.animations.getChildByName("state_"+state);
 		}
-		if(animation){
-			animation.name = "state_"+state;
-			this.animations.add(animation);
-		}
-		return this;
-	}
-	,getStateAnimation:function(state){
-		return this.animations.getChildByName("state_"+state);
+
+		if(callInit)
+			this.init.apply(this,arguments);
 	}
 },{
 	STATE_DEFAULT:1

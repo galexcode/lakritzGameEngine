@@ -14,7 +14,7 @@ var PhysiTestScreen = LGE.World.extend({
 	physicsPrecision:1
 	,boxes:null
 	,show:function(e){
-		this.camera = new THREE.PerspectiveCamera(50,this.game.getAspectRatio(),LGE.Screen.cameraDefaultNear,LGE.Screen.cameraDefaultFar);
+		this.camera = new THREE.PerspectiveCamera(65,this.game.getAspectRatio(),LGE.Screen.cameraDefaultNear,LGE.Screen.cameraDefaultFar);
 		this.camera.position = new THREE.Vector3(500,500,2000);
 		this.camera.lookAt(this.scene.position.clone().setY(300));
 		this.game.getRenderer().setClearColorHex(0,1);
@@ -35,7 +35,7 @@ var PhysiTestScreen = LGE.World.extend({
 		var wf = false;
 		var ground = new LGE.ENTITIES.Entity(
 			new THREE.CubeGeometry(5000,10,5000)
-			,new THREE.MeshPhongMaterial({color:0x111111,wireframe:wf})
+			,new THREE.MeshPhongMaterial({color:0xaaaaaa,wireframe:wf})
 			,1 //fric
 			,.3 //rest
 			,0 //mass

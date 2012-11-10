@@ -238,9 +238,9 @@ LGE.Game = lakritz.Model.extend({
 			this.lastUpdate = tsUpdate;
 			this.screen.update(tsUpdate);
 		}
-		this.debugGraphObject&&this.debugGraphObject.update();
-
 		if(!this.bypassRendering)
 			this.renderer.render(this.screen.scene,this.screen.camera);
+
+		this.debugGraphObject&&this.debugGraphObject.update();
 	}
 });

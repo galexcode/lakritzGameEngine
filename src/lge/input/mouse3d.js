@@ -79,8 +79,8 @@ LGE.Mouse3D = lakritz.Model.extend({
 				&& pos.y <= object.position.y + object.geometry.boundingBox.max.y
 				&& pos.y >= object.position.y + object.geometry.boundingBox.min.y
 				
-				&& pos.z <= object.position.z + object.geometry.boundingBox.max.z
-				&& pos.z >= object.position.z + object.geometry.boundingBox.min.z
+				/*&& pos.z <= object.position.z + object.geometry.boundingBox.max.z
+				&& pos.z >= object.position.z + object.geometry.boundingBox.min.z*/
 				
 				){
 				return true;
