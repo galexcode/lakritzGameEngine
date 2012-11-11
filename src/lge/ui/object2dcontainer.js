@@ -31,7 +31,10 @@ LGE.UI.Object2DContainer = lakritz.makeClass(LGE.UI.Object2D,{
 				context.save();
 				context.translate(this.children[child].position.x, this.children[child].position.y);
 				if(this.children[child].rotation!==0){
-					context.rotate(this.children[child].rotation);
+					context.rotate(LGE.Math.deg2rad(this.children[child].rotation));
+				}
+				if(this.children[child].scale.x!==1||this.children[child].scale.y!==1){
+					context.scale(this.children[child].scale.x,this.children[child].scale.y);
 				}
 				this.children[child].draw(context);
 				context.restore();
@@ -114,5 +117,27 @@ LGE.UI.Object2DContainer = lakritz.makeClass(LGE.UI.Object2D,{
 
 		return undefined;
 
+	}
+	,setChildIndex:function(child,i){
+		if(this.children.indexOf(child)<0){
+			return false;
+		}
+		if(i<0||i>this.children.length-1){
+			console.warn("LGE.UI.Object2DContainer.setChildIndex: index out of range");
+			return false;
+		}
+		var origIndex = this.getChildIndex(child);
+		this.children.splice(origIndex,1);
+		this.children.splice(i,0,child);
+		return true;
+	}
+	,getChildIndex:function(child){
+		var i=this.children.length;
+		while(i--){
+			if(this.children[i]===child){
+				return i;
+			}
+		}
+		return -1;
 	}
 });

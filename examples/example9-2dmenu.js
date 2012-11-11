@@ -52,7 +52,10 @@ var myGUI = LGE.UI.Object2DContainer.extend({
 		this.unbind("addedToStage",this.addedToStage);
 		var tb = new LGE.UI.Button2D("test123");
 		tb.position.x = this.stage.width / 2;
-		tb.position.y = this.stage.height / 2  - 10;
+		tb.position.y = this.stage.height / 2;
+		tb.scale.x = 1;
+		tb.scale.y = 1;
+		tb.rotation = 45;
 		this.add(tb);
 	}
 });
