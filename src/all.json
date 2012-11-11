@@ -26,8 +26,13 @@
 	,"lge/game/screen/sceneinspectorscreen.js"
 	,"lge/assets/assets.js"
 	,"lge/ui/namespace.js"
+	,"lge/ui/object2d.js"
+	,"lge/ui/object2dcontainer.js"
+	,"lge/ui/shape2d.js"
 	,"lge/ui/button.js"
 	,"lge/ui/button3d.js"
+	,"lge/ui/button2d.js"
 	,"lge/ui/layer2d.js"
+	,"lge/ui/text2d.js"
 	,"lge/lgewrap.js"
 ]

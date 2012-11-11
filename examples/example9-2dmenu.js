@@ -34,8 +34,7 @@ var MenuScreen = LGE.Screen.extend({
 		
 		this.scene.add(this.sphere = new THREE.Mesh(new THREE.OctahedronGeometry(35,2),new THREE.MeshBasicMaterial({color:0xaaaaaa,wireframe:true})));
 		this.sphere.position.z =-75;
-		var gui = new myUi(this.game);
-		this.scene.add(gui);
+		this.scene.add(new LGE.UI.Layer2D(this.game.width,this.game.height,new myGUI));
 	}
 	,update:function(delta){
 		LGE.Screen.prototype.update.call(this,delta);
@@ -44,53 +43,28 @@ var MenuScreen = LGE.Screen.extend({
 	}
 });
 
-var myUi = LGE.UI.Layer2D.extend({
-	op:0
-	,textOp:1
-	,game:null
-	,animationManager:null
-	,init:function(game){
-		this.game = game;
-		LGE.UI.Layer2D.prototype.init.call(this,game.width>game.height?game.width:game.height);
-		this.draw();
-		this.animationManager = new LGE.AnimationManager;
-		this.bind("update",function(delta){this.animationManager.update(delta);this.draw();});
-		
-		var buttonFlicker = new LGE.AnimationQueue()
-		.queue(new LGE.Animation(this,{textOp:0},{delay:1000,duration:1000,ease:"easeInQuad"}))
-		.queue(new LGE.Animation(this,{textOp:1},{duration:1000,ease:"easeOutQuad"}))
-		.bind("complete",function(){this.start();})
-		.start();
-		
-		this.animationManager.add(buttonFlicker);
-		this.animationManager.add(new LGE.Animation(this,{op:.7},{duration:5000,ease:"easeOutQuad"}).start());
-		var t=this;
-		this.game.bind("resize",function(){if(!t.visible)return; t.map.setSize(this.width); t.draw();})
+var myGUI = LGE.UI.Object2DContainer.extend({
+	init:function(){
+		LGE.UI.Object2DContainer.prototype.init.call(this);	
+		this.bind("addedToStage",this.addedToStage);
 	}
-	,draw:function(){
-		//dimm scene
+	,addedToStage:function(){
+		this.unbind("addedToStage",this.addedToStage);
+		var tb = new LGE.UI.Button2D("test123");
+		tb.position.x = this.stage.width / 2;
+		tb.position.y = this.stage.height / 2  - 10;
+		this.add(tb);
+	}
+});
 
-		var c = this.context;
-		c.save();	
-		c.clearRect(0,0,this.game.width,this.game.height);
-		//c.fillStyle="rgba(255,128,0,"+this.op+")";
-		c.fillStyle="rgba(0,0,0,"+this.op+")";
-		c.fillRect(0,0,this.game.width,this.game.height);
-		c.restore();
-
-		c.save();
-		c.fillStyle="rgba(255,255,230,"+this.textOp+")";
-		//c.font = "36pt Impact, Charcoal, sans-serif";
-		//c.font = "32pt Trebuchet-MS, Helvetica";
-		c.font = "32pt 'Audiowide', cursive";
-		c.textAlign = "center";
-		c.textBaseline = "middle";
-		c.shadowBlur = 30;
-		c.shadowColor = 'rgba(255,250,100,'+this.textOp+')';
-		c.fillText("[press any key to start]",this.game.width / 2,this.game.height / 2);
-		c.restore();
-
-		this.map.needsUpdate = true;
+var myTestO2D = lakritz.makeClass(LGE.UI.Object2D,{
+	init:function(){
+		LGE.UI.Object2D.prototype.init.call(this);
+	}
+	,draw:function(context){
+		context.fillStyle = "#ff0000";
+		context.fillRect(-50,-50,100,100);
+		this.rotation += .01;
 	}
 });
 
