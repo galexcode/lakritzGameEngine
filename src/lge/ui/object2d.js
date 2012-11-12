@@ -9,7 +9,7 @@ LGE.UI.Object2D = lakritz.Model.extend({
 	,rotation:0
 	,parent:null
 	,stage:null
-	,scale:null
+	,scale:null	
 	,constructor:function(){
 		lakritz.Model.apply(this,arguments);
 	}
@@ -17,6 +17,15 @@ LGE.UI.Object2D = lakritz.Model.extend({
 		this.position = position || new THREE.Vector2(0,0);
 		this.rotation = rotation || 0;
 		this.scale = scale || new THREE.Vector2(1,1);
+		
+		var alpha = 1;
+		this.__defineSetter__("alpha",function(a){
+			alpha = a>1?1:(a<0?0:a);
+		});
+
+		this.__defineGetter__("alpha",function(a){
+			return alpha;
+		});	
 	}
 	,draw:null
 });

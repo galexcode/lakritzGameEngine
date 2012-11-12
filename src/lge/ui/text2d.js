@@ -9,7 +9,7 @@ LGE.UI.Text2D = lakritz.makeClass(LGE.UI.Object2D,{
 	,fontStyle:null
 	,init:function(text, fontStyle){
 		this.text = text||"";
-		this.fontStyle = $.extend({},LGE.UI.Text2D.defaultStyle,fontStyle);
+		this.fontStyle = fontStyle||new LGE.UI.Text2D.DefaultStyle;
 		LGE.UI.Object2D.prototype.init.call(this);
 	}
 	,draw:function(context){
@@ -17,40 +17,70 @@ LGE.UI.Text2D = lakritz.makeClass(LGE.UI.Object2D,{
 			return;
 		}
 
-		var s=this.fontStyle,str = s.capitalize?this.text.toUpperCase():this.text;
+		var s=this.fontStyle.get(),str = s.capitalize?this.text.toUpperCase():this.text;
 		context.font = [s.style,s.weight,s.size+'px',s.family].join(" ");
 		context.textAlign = s.align;
 		context.textBaseline = s.baseline;
 
-		if(s.fill||!s.stroke){
-			if(s.shadow > 0){
-				context.shadowBlur = s.shadow;
-				context.shadowColor = s.shadowColor;
+		if(s.fill||s.stroke === false){
+			if(s.shadow !== false){
+				context.shadowBlur = s.shadowSize;
+				context.shadowColor = s.shadow;
 			}
 			context.fillStyle = s.color;
 			context.fillText(str,0,0);
 		}
-		if(s.stroke){
-			context.strokeStyle = s.strokeColor;
+		if(s.stroke !== false){
+			context.strokeStyle = s.stroke;
 			context.lineWidth = s.strokeSize;
 			context.strokeText(str,0,0);
 		}
 	}
-},{
-	defaultStyle:{
-		family:"Arial"
-		,size:12
-		,style:"normal"
-		,color:"#000"
-		,weight:"normal"
-		,stroke:false
-		,fill:true
-		,strokeColor:"#000"
-		,strokeSize: 1
-		,baseline:"top"
-		,align:"left"
-		,shadow:0
-		,capitalize:false
-		,shadowColor:"#000"
+	,getMeasurements:function(context){
+		var s=this.fontStyle.get(),str = s.capitalize?this.text.toUpperCase():this.text, m;
+		context.save();
+		context.font = [s.style,s.weight,s.size+'px',s.family].join(" ");
+		context.textAlign = s.align;
+		context.textBaseline = s.baseline;
+
+		if(s.fill||s.stroke === false){
+			if(s.shadow !== false){
+				context.shadowBlur = s.shadowSize;
+				context.shadowColor = s.shadow;
+				context.shadowOffsetX = s.shadowX;
+				context.shadowOffsetY = s.shadowY;
+			}
+
+		}
+		if(s.stroke !== false){
+			context.strokeStyle = s.stroke;
+			context.lineWidth = s.strokeSize;
+		}
+		m = context.measureText(str);
+		context.restore();
+		return m;
 	}
+},{
+	DefaultStyle: LGE.UI.Style.extend({
+		__defaults:{
+			family:"Arial"
+			,size:12
+			,style:"normal"
+			,color:"#000"
+			,weight:"normal"
+			,stroke:false
+			,fill:true
+			,stroke:false
+			,strokeSize: 1
+			,baseline:"top"
+			,align:"left"
+			,shadow:0
+			,capitalize:false
+			,shadowColor:"#000"
+			,shadow:false
+			,shadowSize:10
+			,shadowX:0
+			,shadowY:0
+		}
+	})
 })

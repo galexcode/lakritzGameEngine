@@ -230,8 +230,8 @@ LGE.Game = lakritz.Model.extend({
 			return;
 		}
 		var t=this;
-		window.setTimeout(function(){t.renderLoop();},this.updateRate);
 		//window.requestAnimFrame(function(){t.renderLoop();});
+		window.setTimeout(function(){t.renderLoop();},this.updateRate);
 
 		var tsUpdate = Date.now();
 		if( tsUpdate - this.lastUpdate > this.updateRate){
@@ -242,5 +242,7 @@ LGE.Game = lakritz.Model.extend({
 			this.renderer.render(this.screen.scene,this.screen.camera);
 
 		this.debugGraphObject&&this.debugGraphObject.update();
+
+		//window.setTimeout(function(){t.renderLoop();},this.updateRate);
 	}
 });

@@ -29,6 +29,9 @@ LGE.UI.Object2DContainer = lakritz.makeClass(LGE.UI.Object2D,{
 		while(child<len){
 			if(this.children[child].visible){
 				context.save();
+				if(this.children[child].alpha!==1){
+					context.globalAlpha *= this.children[child].alpha;
+				}
 				context.translate(this.children[child].position.x, this.children[child].position.y);
 				if(this.children[child].rotation!==0){
 					context.rotate(LGE.Math.deg2rad(this.children[child].rotation));

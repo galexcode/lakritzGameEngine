@@ -20,16 +20,22 @@ LGE.UI.Shape2D = lakritz.makeClass(LGE.UI.Object2D,{
 				console.warn("LGE.UI.Shape2D: width must be greater than 0");
 			}
 			this.domElement.width = w;
+			this.trigger("resize");
 		});
 		this.__defineGetter__("height",function(){
 			return this.domElement.height;
 		});
 		this.__defineSetter__("height",function(h){
-			if(w<=0){
+			if(h<=0){
 				console.warn("LGE.UI.Shape2D: height must be greater than 0");
 			}
 			this.domElement.height = h;
+			this.trigger("resize");
 		});
+
+		this.width = width || 100;
+		this.height = height || 100;
+
 	}
 	,draw:function(context){
 		context.drawImage(this.domElement,0,0);

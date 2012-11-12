@@ -6,6 +6,7 @@
 LGE.UI.Layer2D = lakritz.makeClass(THREE.Sprite,{
 	context:null
 	,object2DContainer:null
+	,clear:true
 	,constructor:function(){
 		lakritz.Model.apply(this,arguments);
 	}
@@ -51,10 +52,15 @@ LGE.UI.Layer2D = lakritz.makeClass(THREE.Sprite,{
 		this.object2DContainer.stage = this;
 		this.object2DContainer.trigger("addedToStage");
 		this.bind("update",function(delta){
+			if(this.clear){
+				this.context.clearRect(0,0,this.width,this.height);
+			}
 			if(!this.object2DContainer)
 				return;
+			this.context.globalAlpha = 1;
 			this.object2DContainer.draw(this.context);
 			this.object2DContainer.trigger("update",delta);
+			this.map.needsUpdate = true;
 		});
 	}
 });

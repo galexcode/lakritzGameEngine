@@ -31,7 +31,6 @@ var MenuScreen = LGE.Screen.extend({
 		this.setCamera(new THREE.PerspectiveCamera(65,this.game.getAspectRatio(),LGE.Screen.cameraDefaultNear,LGE.Screen.cameraDefaultFar));
 		//this.setCamera(new THREE.OrthographicCamera(this.game.width/-2,this.game.height/2,this.game.width/2,this.game.height/-2,1,1000));
 		this.scene.add(this.camera);
-		
 		this.scene.add(this.sphere = new THREE.Mesh(new THREE.OctahedronGeometry(35,2),new THREE.MeshBasicMaterial({color:0xaaaaaa,wireframe:true})));
 		this.sphere.position.z =-75;
 		this.scene.add(new LGE.UI.Layer2D(this.game.width,this.game.height,new myGUI));
@@ -50,13 +49,65 @@ var myGUI = LGE.UI.Object2DContainer.extend({
 	}
 	,addedToStage:function(){
 		this.unbind("addedToStage",this.addedToStage);
-		var tb = new LGE.UI.Button2D("test123");
-		tb.position.x = this.stage.width / 2;
+		/*var tb = new LGE.UI.Button2D("Button 1",150,30);
+		tb.position.x = this.stage.width / 2 - 75;
 		tb.position.y = this.stage.height / 2;
-		tb.scale.x = 1;
-		tb.scale.y = 1;
-		tb.rotation = 45;
+		//tb.rotation = 45;
 		this.add(tb);
+
+		tb = new LGE.UI.Button2D("Button 2",150,30);
+		tb.position.x = this.stage.width / 2 - 75;
+		tb.position.y = this.stage.height / 2 + 35;
+		//tb.rotation = 45;
+		this.add(tb);
+
+		tb = new LGE.UI.Button2D("Button 3",150,30);
+		tb.position.x = this.stage.width / 2 - 75;
+		tb.position.y = this.stage.height / 2 + 70;
+		tb.rotation = 45;
+		tb.alpha = .3;
+		this.add(tb);*/
+
+		var tf = new LGE.UI.Textfield2D("",new LGE.UI.Textfield2D.DefaultStyle({
+			textStyle:new LGE.UI.Text2D.DefaultStyle({
+				color:"red"
+				,weight:"bold"
+			})
+			,boxStyle:new LGE.UI.Box2D.DefaultStyle({
+				color:"#efefef"
+				,border:"#dddddd"
+				,borderSize:1
+			})
+			,padding:15
+		}),200,200);
+		tf.position.x = this.stage.width/2 - 100;
+		tf.position.y = this.stage.height/2 - 100;
+		tf.alpha = 0;
+		tf.text = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.";
+		tf.text += "\n\nLorem ipsum dolor sit amet, consetetur sadipscing elitr.";
+		tf.text += "\n\nLorem ipsum dolor sit amet, consetetur sadipscing elitr.";
+		this.add(tf);
+
+		var tanim = new LGE.Animation(tf,{alpha:1},{delay:1000,duration:1000,ease:"easeInOutQuad"}).start();
+		this.bind("update",function(delta){
+			tanim.update(delta);
+		});
+
+		/*var testshape = new LGE.UI.Shape2D(100,100);
+		testshape.context.color = "black";
+		testshape.context.fillRect(0,0,100,100);
+		testshape.position.x = 200;
+		testshape.position.y = 200;
+		this.add(testshape);*/
+
+		var style = new LGE.UI.Style({
+			derp:1
+			,herp:2
+		});
+		style.bind("change",function(param,value){console.log(param,value)});
+		style.derp=2;
+		style.herp=1337;
+		console.log(style);
 	}
 });
 
